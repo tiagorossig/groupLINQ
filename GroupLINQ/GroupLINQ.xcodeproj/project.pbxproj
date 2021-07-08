@@ -3,10 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D0EDBE3B505E6FC2ED74FD1 /* Pods_GroupLINQ.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADCF6796630C3298B0B9E6AA /* Pods_GroupLINQ.framework */; };
+		4D981AC62697BAC000DCA140 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D981AC52697BABF00DCA140 /* SignUpViewController.swift */; };
+		4DBF339B2697B677000E8DC1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4DBF339A2697B677000E8DC1 /* GoogleService-Info.plist */; };
 		FA461477269745ED00E4ED70 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA461476269745ED00E4ED70 /* AppDelegate.swift */; };
 		FA461479269745ED00E4ED70 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA461478269745ED00E4ED70 /* SceneDelegate.swift */; };
 		FA46147B269745ED00E4ED70 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA46147A269745ED00E4ED70 /* ViewController.swift */; };
@@ -17,6 +20,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2C2FA0013510A54C40CAD042 /* Pods-GroupLINQ.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GroupLINQ.debug.xcconfig"; path = "Target Support Files/Pods-GroupLINQ/Pods-GroupLINQ.debug.xcconfig"; sourceTree = "<group>"; };
+		4D981AC52697BABF00DCA140 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		4DBF339A2697B677000E8DC1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		ADCF6796630C3298B0B9E6AA /* Pods_GroupLINQ.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GroupLINQ.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D343004AF7655B833BD9EF61 /* Pods-GroupLINQ.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GroupLINQ.release.xcconfig"; path = "Target Support Files/Pods-GroupLINQ/Pods-GroupLINQ.release.xcconfig"; sourceTree = "<group>"; };
 		FA461473269745ED00E4ED70 /* GroupLINQ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GroupLINQ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA461476269745ED00E4ED70 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA461478269745ED00E4ED70 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -33,17 +41,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D0EDBE3B505E6FC2ED74FD1 /* Pods_GroupLINQ.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1E514B19E4942267F89B687B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ADCF6796630C3298B0B9E6AA /* Pods_GroupLINQ.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4763068BBA206244F724AEE1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2C2FA0013510A54C40CAD042 /* Pods-GroupLINQ.debug.xcconfig */,
+				D343004AF7655B833BD9EF61 /* Pods-GroupLINQ.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		FA46146A269745ED00E4ED70 = {
 			isa = PBXGroup;
 			children = (
 				FA461475269745ED00E4ED70 /* GroupLINQ */,
 				FA461474269745ED00E4ED70 /* Products */,
+				4763068BBA206244F724AEE1 /* Pods */,
+				1E514B19E4942267F89B687B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -61,11 +89,13 @@
 				FA461476269745ED00E4ED70 /* AppDelegate.swift */,
 				FA461478269745ED00E4ED70 /* SceneDelegate.swift */,
 				FA46147A269745ED00E4ED70 /* ViewController.swift */,
+				4D981AC52697BABF00DCA140 /* SignUpViewController.swift */,
 				FA46147C269745ED00E4ED70 /* Main.storyboard */,
 				FA461482269745EE00E4ED70 /* Assets.xcassets */,
 				FA461484269745EE00E4ED70 /* LaunchScreen.storyboard */,
 				FA461487269745EE00E4ED70 /* Info.plist */,
 				FA46147F269745ED00E4ED70 /* GroupLINQ.xcdatamodeld */,
+				4DBF339A2697B677000E8DC1 /* GoogleService-Info.plist */,
 			);
 			path = GroupLINQ;
 			sourceTree = "<group>";
@@ -77,9 +107,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FA46148A269745EE00E4ED70 /* Build configuration list for PBXNativeTarget "GroupLINQ" */;
 			buildPhases = (
+				1F0EE54A4172830D47EFF6E1 /* [CP] Check Pods Manifest.lock */,
 				FA46146F269745ED00E4ED70 /* Sources */,
 				FA461470269745ED00E4ED70 /* Frameworks */,
 				FA461471269745ED00E4ED70 /* Resources */,
+				7D1C9CA48B19A00E2AC73600 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -130,10 +162,53 @@
 				FA461486269745EE00E4ED70 /* LaunchScreen.storyboard in Resources */,
 				FA461483269745EE00E4ED70 /* Assets.xcassets in Resources */,
 				FA46147E269745ED00E4ED70 /* Main.storyboard in Resources */,
+				4DBF339B2697B677000E8DC1 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1F0EE54A4172830D47EFF6E1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GroupLINQ-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7D1C9CA48B19A00E2AC73600 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GroupLINQ/Pods-GroupLINQ-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GroupLINQ/Pods-GroupLINQ-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GroupLINQ/Pods-GroupLINQ-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FA46146F269745ED00E4ED70 /* Sources */ = {
@@ -144,6 +219,7 @@
 				FA461477269745ED00E4ED70 /* AppDelegate.swift in Sources */,
 				FA461479269745ED00E4ED70 /* SceneDelegate.swift in Sources */,
 				FA461481269745ED00E4ED70 /* GroupLINQ.xcdatamodeld in Sources */,
+				4D981AC62697BAC000DCA140 /* SignUpViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,7 +296,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -275,7 +351,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -287,6 +363,7 @@
 		};
 		FA46148B269745EE00E4ED70 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2C2FA0013510A54C40CAD042 /* Pods-GroupLINQ.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -306,6 +383,7 @@
 		};
 		FA46148C269745EE00E4ED70 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D343004AF7655B833BD9EF61 /* Pods-GroupLINQ.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
