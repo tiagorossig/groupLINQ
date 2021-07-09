@@ -12,6 +12,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
+    var className = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -43,6 +45,28 @@ class ViewController: UIViewController {
             }
         }
     }
+    
+    @IBAction func createClassPressed(_ sender: Any) {
+        let alert = UIAlertController(title: "Class Name", message: "", preferredStyle: .alert)
+                alert.addTextField { (textField) in
+                    textField.text = ""
+                }
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+                    self.className = alert.textFields![0].text!
+                    self.performSegue(withIdentifier: "createClassSegue", sender: self)
+               
+                }))
+
+                self.present(alert, animated: true, completion: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            if segue.identifier == "createClassSegue" ,
+                let nextVC = segue.destination as? ClassOverviewVC {
+                nextVC.delegate = self
+                nextVC.className = className
+            }
+        }
     
 }
 
