@@ -14,6 +14,7 @@
 		FA461481269745ED00E4ED70 /* GroupLINQ.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FA46147F269745ED00E4ED70 /* GroupLINQ.xcdatamodeld */; };
 		FA461483269745EE00E4ED70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA461482269745EE00E4ED70 /* Assets.xcassets */; };
 		FA461486269745EE00E4ED70 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA461484269745EE00E4ED70 /* LaunchScreen.storyboard */; };
+		FA46148E26974FBB00E4ED70 /* ClassOverviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA46148D26974FBB00E4ED70 /* ClassOverviewVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		FA461482269745EE00E4ED70 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FA461485269745EE00E4ED70 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FA461487269745EE00E4ED70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FA46148D26974FBB00E4ED70 /* ClassOverviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassOverviewVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				FA461484269745EE00E4ED70 /* LaunchScreen.storyboard */,
 				FA461487269745EE00E4ED70 /* Info.plist */,
 				FA46147F269745ED00E4ED70 /* GroupLINQ.xcdatamodeld */,
+				FA46148D26974FBB00E4ED70 /* ClassOverviewVC.swift */,
 			);
 			path = GroupLINQ;
 			sourceTree = "<group>";
@@ -142,6 +145,7 @@
 			files = (
 				FA46147B269745ED00E4ED70 /* ViewController.swift in Sources */,
 				FA461477269745ED00E4ED70 /* AppDelegate.swift in Sources */,
+				FA46148E26974FBB00E4ED70 /* ClassOverviewVC.swift in Sources */,
 				FA461479269745ED00E4ED70 /* SceneDelegate.swift in Sources */,
 				FA461481269745ED00E4ED70 /* GroupLINQ.xcdatamodeld in Sources */,
 			);
