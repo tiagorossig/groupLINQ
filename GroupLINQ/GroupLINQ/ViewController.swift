@@ -16,11 +16,13 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        if Auth.auth().currentUser != nil {
+            self.performSegue(withIdentifier: "HomeSegueIdentifier", sender: self)
+        }
     }
 
     @IBAction func loginPressed(_ sender: Any) {
-        print("here")
         guard let email = emailTextField.text,
               let password = passwordTextField.text,
               email.count > 0,
