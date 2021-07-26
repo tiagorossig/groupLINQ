@@ -8,13 +8,10 @@
 import UIKit
 
 class ClassOverviewVC: UIViewController {
-    
+    @IBOutlet weak var classNameLabel: UILabel!
     var className = ""
     var delegate: UIViewController!
 
-    
-    @IBOutlet weak var classNameLabel: UILabel!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         classNameLabel.text = className

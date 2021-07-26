@@ -12,8 +12,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -30,25 +28,26 @@ class ViewController: UIViewController {
         }
         
 ////        COMMENTING OUT AUTH FOR FASTER TESTING
-//        Auth.auth().signIn(withEmail: email, password: password) {
-//          user, error in
-//          if let error = error, user == nil {
-//            let alert = UIAlertController(
-//              title: "Sign in failed",
-//              message: error.localizedDescription,
-//              preferredStyle: .alert)
-//
-//            alert.addAction(UIAlertAction(title:"OK",style:.default))
-//            self.present(alert, animated: true, completion: nil)
-//          }
-//            if error == nil {
-//                self.performSegue(withIdentifier: "HomeSegueIdentifier", sender: self)
-//            }
-//        }
-        self.performSegue(withIdentifier: "HomeSegueIdentifier", sender: self)
+        Auth.auth().signIn(withEmail: email, password: password) {
+            user, error in
+            if let error = error, user == nil {
+                let alert = UIAlertController(
+                  title: "Sign in failed",
+                  message: error.localizedDescription,
+                  preferredStyle: .alert)
+
+                alert.addAction(UIAlertAction(title:"OK",style:.default))
+                self.present(alert, animated: true, completion: nil)
+            }
+            if error == nil {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let mainTabBarController = storyboard.instantiateViewController(identifier: "MainTabBarController")
+
+                // This is to get the SceneDelegate object from your view controller
+                // then call the change root view controller function to change to main tab bar
+                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
+            }
+        }
     }
-    
-    
-   
     
 }

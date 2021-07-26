@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4D981AC62697BAC000DCA140 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D981AC52697BABF00DCA140 /* SignUpViewController.swift */; };
 		4DBF339B2697B677000E8DC1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4DBF339A2697B677000E8DC1 /* GoogleService-Info.plist */; };
+		4DDA10E226AF47D80045BC1B /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDA10E126AF47D80045BC1B /* SettingsVC.swift */; };
 		FA3EFD6826AEC27E006F7C33 /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FA3EFD6A26AEC30F006F7C33 /* Pods_GroupLINQ.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98046D6EF24ECF320B093B5F /* Pods_GroupLINQ.framework */; };
 		FA461477269745ED00E4ED70 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA461476269745ED00E4ED70 /* AppDelegate.swift */; };
@@ -39,6 +40,7 @@
 /* Begin PBXFileReference section */
 		4D981AC52697BABF00DCA140 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		4DBF339A2697B677000E8DC1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4DDA10E126AF47D80045BC1B /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		4F5FDD8A42EAA8CF18F9FCEC /* Pods-GroupLINQ.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GroupLINQ.release.xcconfig"; path = "Target Support Files/Pods-GroupLINQ/Pods-GroupLINQ.release.xcconfig"; sourceTree = "<group>"; };
 		688662615FAFBBC04C4BDB0C /* Pods-GroupLINQ.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GroupLINQ.debug.xcconfig"; path = "Target Support Files/Pods-GroupLINQ/Pods-GroupLINQ.debug.xcconfig"; sourceTree = "<group>"; };
 		98046D6EF24ECF320B093B5F /* Pods_GroupLINQ.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GroupLINQ.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -111,6 +113,7 @@
 				FA7002E426AECDC800C63187 /* ClassDirectoryVC.swift */,
 				4D981AC52697BABF00DCA140 /* SignUpViewController.swift */,
 				FA46147C269745ED00E4ED70 /* Main.storyboard */,
+				4DDA10E126AF47D80045BC1B /* SettingsVC.swift */,
 				FA461482269745EE00E4ED70 /* Assets.xcassets */,
 				FA461484269745EE00E4ED70 /* LaunchScreen.storyboard */,
 				FA461487269745EE00E4ED70 /* Info.plist */,
@@ -242,6 +245,7 @@
 				FA461477269745ED00E4ED70 /* AppDelegate.swift in Sources */,
 				FA4614902697D26B00E4ED70 /* ClassOverviewVC.swift in Sources */,
 				FA461479269745ED00E4ED70 /* SceneDelegate.swift in Sources */,
+				4DDA10E226AF47D80045BC1B /* SettingsVC.swift in Sources */,
 				FA461481269745ED00E4ED70 /* GroupLINQ.xcdatamodeld in Sources */,
 				4D981AC62697BAC000DCA140 /* SignUpViewController.swift in Sources */,
 			);

@@ -31,7 +31,6 @@ class ClassDirectoryVC: UIViewController {
         
         self.present(alert, animated: true, completion: nil)
     }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "createClassSegue" ,
             let nextVC = segue.destination as? ClassOverviewVC {
