@@ -9,11 +9,19 @@ import UIKit
 import Firebase
 
 class SettingsVC: UIViewController {
-
+    @IBOutlet weak var darkModeSwitch: UISwitch!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    }
+    
+    @IBAction func darkModeChanged(_ sender: Any) {
+        if darkModeSwitch.isOn {
+            overrideUserInterfaceStyle = .dark
+        }
+        else {
+            overrideUserInterfaceStyle = .light
+        }
     }
     
     @IBAction func logoutPressed(_ sender: Any) {

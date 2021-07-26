@@ -262,6 +262,9 @@
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="zj5-Jc-meh">
                                 <rect key="frame" x="291" y="367" width="49" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="darkModeChanged:" destination="CDV-ds-MyY" eventType="valueChanged" id="Bgy-Yv-2Tr"/>
+                                </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Dark Mode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gjN-cp-uz2">
                                 <rect key="frame" x="113" y="377" width="84" height="21"/>
@@ -301,6 +304,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Settings" id="URp-iA-P3t"/>
+                    <connections>
+                        <outlet property="darkModeSwitch" destination="zj5-Jc-meh" id="Uz8-ez-lG6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qCs-QA-Fwy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="RaJ-z9-Nks" userLabel="Exit" sceneMemberID="exit"/>
