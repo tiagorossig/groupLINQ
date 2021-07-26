@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ttu-KC-w9o">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ttu-KC-w9o">
     <device id="retina6_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Class DirectoryVC-->
         <scene sceneID="xac-4h-0fP">
             <objects>
-                <viewController id="4Xp-xg-uOM" sceneMemberID="viewController">
+                <viewController id="4Xp-xg-uOM" customClass="ClassDirectoryVC" customModule="GroupLINQ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="M56-vg-CqK">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -35,8 +35,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
-                                    <action selector="createClassPressed:" destination="f4g-wr-q4G" eventType="touchUpInside" id="j21-aM-jaJ"/>
-                                    <segue destination="Dea-7N-utS" kind="show" identifier="createClassSegue" id="400-lJ-ykf"/>
+                                    <action selector="createClassPressed:" destination="4Xp-xg-uOM" eventType="touchUpInside" id="iHT-9m-7jf"/>
+                                    <action selector="createClassPressed:" destination="f4g-wr-q4G" eventType="touchUpInside" id="nxJ-MJ-5pT"/>
+                                    <segue destination="Dea-7N-utS" kind="show" identifier="createClassSegue" id="SgA-PH-Vjw"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -48,7 +49,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kFR-xY-6ji" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="f4g-wr-q4G" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1448" y="-658"/>
+            <point key="canvasLocation" x="1433" y="-652"/>
         </scene>
         <!--Class OverviewVC-->
         <scene sceneID="BFT-pH-Nqr">
@@ -70,6 +71,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="VJP-CY-bet"/>
+                    <connections>
+                        <outlet property="classNameLabel" destination="4co-tI-IgN" id="gTG-ey-bnL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vya-ZL-waK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

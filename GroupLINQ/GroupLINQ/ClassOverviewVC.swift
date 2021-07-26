@@ -12,6 +12,7 @@ class ClassOverviewVC: UIViewController {
     var className = ""
     var delegate: UIViewController!
 
+    
     @IBOutlet weak var classNameLabel: UILabel!
     
     override func viewDidLoad() {

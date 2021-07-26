@@ -19,6 +19,7 @@
 		FA461483269745EE00E4ED70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA461482269745EE00E4ED70 /* Assets.xcassets */; };
 		FA461486269745EE00E4ED70 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA461484269745EE00E4ED70 /* LaunchScreen.storyboard */; };
 		FA4614902697D26B00E4ED70 /* ClassOverviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA46148F2697D26B00E4ED70 /* ClassOverviewVC.swift */; };
+		FA7002E526AECDC800C63187 /* ClassDirectoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7002E426AECDC800C63187 /* ClassDirectoryVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -51,6 +52,7 @@
 		FA461485269745EE00E4ED70 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FA461487269745EE00E4ED70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA46148F2697D26B00E4ED70 /* ClassOverviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassOverviewVC.swift; sourceTree = "<group>"; };
+		FA7002E426AECDC800C63187 /* ClassDirectoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassDirectoryVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				FA461476269745ED00E4ED70 /* AppDelegate.swift */,
 				FA461478269745ED00E4ED70 /* SceneDelegate.swift */,
 				FA46147A269745ED00E4ED70 /* ViewController.swift */,
+				FA7002E426AECDC800C63187 /* ClassDirectoryVC.swift */,
 				4D981AC52697BABF00DCA140 /* SignUpViewController.swift */,
 				FA46147C269745ED00E4ED70 /* Main.storyboard */,
 				FA461482269745EE00E4ED70 /* Assets.xcassets */,
@@ -234,6 +237,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA7002E526AECDC800C63187 /* ClassDirectoryVC.swift in Sources */,
 				FA46147B269745ED00E4ED70 /* ViewController.swift in Sources */,
 				FA461477269745ED00E4ED70 /* AppDelegate.swift in Sources */,
 				FA4614902697D26B00E4ED70 /* ClassOverviewVC.swift in Sources */,
