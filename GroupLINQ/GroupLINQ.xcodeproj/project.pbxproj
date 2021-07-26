@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1D0EDBE3B505E6FC2ED74FD1 /* Pods_GroupLINQ.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADCF6796630C3298B0B9E6AA /* Pods_GroupLINQ.framework */; };
 		4D981AC62697BAC000DCA140 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D981AC52697BABF00DCA140 /* SignUpViewController.swift */; };
 		4DBF339B2697B677000E8DC1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4DBF339A2697B677000E8DC1 /* GoogleService-Info.plist */; };
+		FA3EFD6826AEC27E006F7C33 /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FA3EFD6A26AEC30F006F7C33 /* Pods_GroupLINQ.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98046D6EF24ECF320B093B5F /* Pods_GroupLINQ.framework */; };
 		FA461477269745ED00E4ED70 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA461476269745ED00E4ED70 /* AppDelegate.swift */; };
 		FA461479269745ED00E4ED70 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA461478269745ED00E4ED70 /* SceneDelegate.swift */; };
 		FA46147B269745ED00E4ED70 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA46147A269745ED00E4ED70 /* ViewController.swift */; };
@@ -20,12 +21,26 @@
 		FA4614902697D26B00E4ED70 /* ClassOverviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA46148F2697D26B00E4ED70 /* ClassOverviewVC.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		FA3EFD6926AEC27E006F7C33 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				FA3EFD6826AEC27E006F7C33 /* (null) in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		2C2FA0013510A54C40CAD042 /* Pods-GroupLINQ.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GroupLINQ.debug.xcconfig"; path = "Target Support Files/Pods-GroupLINQ/Pods-GroupLINQ.debug.xcconfig"; sourceTree = "<group>"; };
 		4D981AC52697BABF00DCA140 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		4DBF339A2697B677000E8DC1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		ADCF6796630C3298B0B9E6AA /* Pods_GroupLINQ.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GroupLINQ.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D343004AF7655B833BD9EF61 /* Pods-GroupLINQ.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GroupLINQ.release.xcconfig"; path = "Target Support Files/Pods-GroupLINQ/Pods-GroupLINQ.release.xcconfig"; sourceTree = "<group>"; };
+		4F5FDD8A42EAA8CF18F9FCEC /* Pods-GroupLINQ.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GroupLINQ.release.xcconfig"; path = "Target Support Files/Pods-GroupLINQ/Pods-GroupLINQ.release.xcconfig"; sourceTree = "<group>"; };
+		688662615FAFBBC04C4BDB0C /* Pods-GroupLINQ.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GroupLINQ.debug.xcconfig"; path = "Target Support Files/Pods-GroupLINQ/Pods-GroupLINQ.debug.xcconfig"; sourceTree = "<group>"; };
+		98046D6EF24ECF320B093B5F /* Pods_GroupLINQ.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GroupLINQ.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA461473269745ED00E4ED70 /* GroupLINQ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GroupLINQ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA461476269745ED00E4ED70 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA461478269745ED00E4ED70 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -43,28 +58,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1D0EDBE3B505E6FC2ED74FD1 /* Pods_GroupLINQ.framework in Frameworks */,
+				FA3EFD6A26AEC30F006F7C33 /* Pods_GroupLINQ.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1E514B19E4942267F89B687B /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				ADCF6796630C3298B0B9E6AA /* Pods_GroupLINQ.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		4763068BBA206244F724AEE1 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2C2FA0013510A54C40CAD042 /* Pods-GroupLINQ.debug.xcconfig */,
-				D343004AF7655B833BD9EF61 /* Pods-GroupLINQ.release.xcconfig */,
+				688662615FAFBBC04C4BDB0C /* Pods-GroupLINQ.debug.xcconfig */,
+				4F5FDD8A42EAA8CF18F9FCEC /* Pods-GroupLINQ.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		F179CA8122A943C162BB60AD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				98046D6EF24ECF320B093B5F /* Pods_GroupLINQ.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		FA46146A269745ED00E4ED70 = {
@@ -73,7 +88,7 @@
 				FA461475269745ED00E4ED70 /* GroupLINQ */,
 				FA461474269745ED00E4ED70 /* Products */,
 				4763068BBA206244F724AEE1 /* Pods */,
-				1E514B19E4942267F89B687B /* Frameworks */,
+				F179CA8122A943C162BB60AD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -110,11 +125,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FA46148A269745EE00E4ED70 /* Build configuration list for PBXNativeTarget "GroupLINQ" */;
 			buildPhases = (
-				1F0EE54A4172830D47EFF6E1 /* [CP] Check Pods Manifest.lock */,
+				D241921C120F5D0D539AEC2C /* [CP] Check Pods Manifest.lock */,
 				FA46146F269745ED00E4ED70 /* Sources */,
 				FA461470269745ED00E4ED70 /* Frameworks */,
 				FA461471269745ED00E4ED70 /* Resources */,
-				7D1C9CA48B19A00E2AC73600 /* [CP] Embed Pods Frameworks */,
+				FA3EFD6926AEC27E006F7C33 /* Embed Frameworks */,
+				C34B15CFC44659317E967E8A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -172,7 +188,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1F0EE54A4172830D47EFF6E1 /* [CP] Check Pods Manifest.lock */ = {
+		C34B15CFC44659317E967E8A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GroupLINQ/Pods-GroupLINQ-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GroupLINQ/Pods-GroupLINQ-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GroupLINQ/Pods-GroupLINQ-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D241921C120F5D0D539AEC2C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -192,23 +225,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7D1C9CA48B19A00E2AC73600 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GroupLINQ/Pods-GroupLINQ-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GroupLINQ/Pods-GroupLINQ-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GroupLINQ/Pods-GroupLINQ-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -286,6 +302,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -347,6 +364,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -358,6 +376,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -367,12 +386,13 @@
 		};
 		FA46148B269745EE00E4ED70 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2C2FA0013510A54C40CAD042 /* Pods-GroupLINQ.debug.xcconfig */;
+			baseConfigurationReference = 688662615FAFBBC04C4BDB0C /* Pods-GroupLINQ.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X4WG9RQT89;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = GroupLINQ/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -387,12 +407,13 @@
 		};
 		FA46148C269745EE00E4ED70 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D343004AF7655B833BD9EF61 /* Pods-GroupLINQ.release.xcconfig */;
+			baseConfigurationReference = 4F5FDD8A42EAA8CF18F9FCEC /* Pods-GroupLINQ.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X4WG9RQT89;
+				"EXCLUDED_ARCHS[sdk=*]" = "";
 				INFOPLIST_FILE = GroupLINQ/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
