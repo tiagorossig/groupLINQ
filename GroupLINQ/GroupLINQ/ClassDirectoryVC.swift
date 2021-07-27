@@ -13,6 +13,22 @@ class ClassDirectoryVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(darkModeEnabled(_:)), name: .darkModeEnabled, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(darkModeDisabled(_:)), name: .darkModeDisabled, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .darkModeEnabled, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .darkModeDisabled, object: nil)
+    }
+    
+    @objc private func darkModeEnabled(_ notification: Notification) {
+        overrideUserInterfaceStyle = .dark
+    }
+
+    @objc private func darkModeDisabled(_ notification: Notification) {
+        overrideUserInterfaceStyle = .light
     }
     
     @IBAction func createClassPressed(_ sender: Any) {
