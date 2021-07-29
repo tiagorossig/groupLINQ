@@ -7,15 +7,36 @@
 
 import UIKit
 
-class ClassDirectoryVC: UIViewController {
+var classList : [String] = ["iOS"]
+
+class cdCell : UITableViewCell {
+    @IBOutlet weak var classLabel: UILabel!
+}
+
+class ClassDirectoryVC: UIViewController,  UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet weak var cdTableView: UITableView!
     var className = ""
+    let tcID = "classTVC"
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        cdTableView.delegate = self
+        cdTableView.dataSource = self
         NotificationCenter.default.addObserver(self, selector: #selector(darkModeEnabled(_:)), name: .darkModeEnabled, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(darkModeDisabled(_:)), name: .darkModeDisabled, object: nil)
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return classList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: tcID, for: indexPath as IndexPath)
+        let row = indexPath.row
+        cell.textLabel?.text = "Class \(row): \(classList[row])"
+        return cell
     }
     
     deinit {
