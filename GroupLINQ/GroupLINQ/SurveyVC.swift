@@ -1,20 +1,16 @@
 //
-//  ClassOverviewVC.swift
+//  SurveyVC.swift
 //  GroupLINQ
 //
-//  Created by Tiago Grimaldi Rossi on 7/8/21.
+//  Created by Erika Tan on 7/30/21.
 //
 
 import UIKit
 
-class ClassOverviewVC: UIViewController {
-    @IBOutlet weak var classNameLabel: UILabel!
-    var className = ""
-    var delegate: UIViewController!
+class SurveyVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        classNameLabel.text = className
     }
     
     override func viewWillAppear(_ animated: Bool) {

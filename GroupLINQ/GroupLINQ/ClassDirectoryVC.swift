@@ -19,8 +19,16 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        NotificationCenter.default.addObserver(self, selector: #selector(darkModeEnabled(_:)), name: .darkModeEnabled, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(darkModeDisabled(_:)), name: .darkModeDisabled, object: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let userDefaults = UserDefaults.standard
+        if userDefaults.bool(forKey: "darkModeEnabled") {
+            overrideUserInterfaceStyle = .dark
+        }
+        else {
+            overrideUserInterfaceStyle = .light
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -32,21 +40,6 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         let row = indexPath.row
         cell.textLabel?.text = "Class \(row): \(classList[row])"
         return cell
-    }
-    
-    
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self, name: .darkModeEnabled, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .darkModeDisabled, object: nil)
-    }
-    
-    @objc private func darkModeEnabled(_ notification: Notification) {
-        overrideUserInterfaceStyle = .dark
-    }
-
-    @objc private func darkModeDisabled(_ notification: Notification) {
-        overrideUserInterfaceStyle = .light
     }
     
     @IBAction func createClassPressed(_ sender: Any) {

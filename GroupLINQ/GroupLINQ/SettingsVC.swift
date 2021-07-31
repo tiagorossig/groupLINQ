@@ -8,47 +8,35 @@
 import UIKit
 import Firebase
 
-extension Notification.Name {
-    static let darkModeEnabled = Notification.Name("darkModeEnabled")
-    static let darkModeDisabled = Notification.Name("darkModeDisabled")
-}
-
 class SettingsVC: UIViewController {
     @IBOutlet weak var darkModeSwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(darkModeEnabled(_:)), name: .darkModeEnabled, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(darkModeDisabled(_:)), name: .darkModeDisabled, object: nil)
+        let userDefaults = UserDefaults.standard
+        darkModeSwitch.isOn = userDefaults.bool(forKey: "darkModeEnabled")
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self, name: .darkModeEnabled, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .darkModeDisabled, object: nil)
+    override func viewWillAppear(_ animated: Bool) {
+        let userDefaults = UserDefaults.standard
+        if userDefaults.bool(forKey: "darkModeEnabled") {
+            overrideUserInterfaceStyle = .dark
+        }
+        else {
+            overrideUserInterfaceStyle = .light
+        }
     }
     
     @IBAction func darkModeChanged(_ sender: Any) {
+        let userDefaults = UserDefaults.standard
         if darkModeSwitch.isOn {
-            
-//            userDefaults.set(true, forKey: "darkModeEnabled")
-
-            // Post the notification to let all current view controllers that the app has changed to dark mode, and they should theme themselves to reflect this change.
-            NotificationCenter.default.post(name: .darkModeEnabled, object: nil)
+            userDefaults.set(true, forKey: "darkModeEnabled")
+            overrideUserInterfaceStyle = .dark
         }
         else {
-//            userDefaults.set(false, forKey: "darkModeEnabled")
-
-            // Post the notification to let all current view controllers that the app has changed to non-dark mode, and they should theme themselves to reflect this change.
-            NotificationCenter.default.post(name: .darkModeDisabled, object: nil)
+            userDefaults.set(false, forKey: "darkModeEnabled")
+            overrideUserInterfaceStyle = .light
         }
-    }
-    
-    @objc private func darkModeEnabled(_ notification: Notification) {
-        overrideUserInterfaceStyle = .dark
-    }
-
-    @objc private func darkModeDisabled(_ notification: Notification) {
-        overrideUserInterfaceStyle = .light
     }
     
     @IBAction func logoutPressed(_ sender: Any) {
