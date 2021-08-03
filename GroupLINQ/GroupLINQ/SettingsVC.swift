@@ -9,11 +9,6 @@ import UIKit
 import Firebase
 import AVFoundation
 
-extension Notification.Name {
-    static let darkModeEnabled = Notification.Name("darkModeEnabled")
-    static let darkModeDisabled = Notification.Name("darkModeDisabled")
-}
-
 class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var darkModeSwitch: UISwitch!
