@@ -79,10 +79,10 @@
             </objects>
             <point key="canvasLocation" x="1047.1962616822429" y="75.161987041036724"/>
         </scene>
-        <!--Sign Up View Controller-->
+        <!--Sign UpVC-->
         <scene sceneID="fh0-hb-a6F">
             <objects>
-                <viewController id="uLX-gJ-rlc" customClass="SignUpViewController" customModule="GroupLINQ" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="uLX-gJ-rlc" customClass="SignUpVC" customModule="GroupLINQ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9gL-I1-kHz">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="872"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -151,10 +151,10 @@
             </objects>
             <point key="canvasLocation" x="1871.4953271028037" y="75.809935205183592"/>
         </scene>
-        <!--Long Press View Controller-->
+        <!--SurveyVC-->
         <scene sceneID="TnG-oR-qie">
             <objects>
-                <viewController id="ETz-Co-5ha" customClass="LongPressViewController" customModule="GroupLINQ" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ETz-Co-5ha" customClass="SurveyVC" customModule="GroupLINQ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bo7-r3-nNK">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="872"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -171,18 +171,18 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Please select the times you are available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wbx-zD-g9t">
-                                <rect key="frame" x="61" y="94" width="306" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hb2-Ei-KiW">
                                 <rect key="frame" x="190" y="742" width="49" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Submit"/>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Please mark the times you are available" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wbx-zD-g9t">
+                                <rect key="frame" x="65" y="93" width="299" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="x7M-yF-rmy"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
