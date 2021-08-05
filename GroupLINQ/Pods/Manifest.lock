@@ -85,6 +85,7 @@ PODS:
   - GoogleUtilities/UserDefaults (7.5.0):
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (1.6.1)
+  - JZCalendarWeekView (0.7.1)
   - nanopb (2.30908.0):
     - nanopb/decode (= 2.30908.0)
     - nanopb/encode (= 2.30908.0)
@@ -96,6 +97,7 @@ DEPENDENCIES:
   - Firebase
   - Firebase/Analytics
   - Firebase/Auth
+  - JZCalendarWeekView
 
 SPEC REPOS:
   trunk:
@@ -109,6 +111,7 @@ SPEC REPOS:
     - GoogleDataTransport
     - GoogleUtilities
     - GTMSessionFetcher
+    - JZCalendarWeekView
     - nanopb
     - PromisesObjC
 
@@ -123,9 +126,10 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 85fd18ff3019bb85d3f2c551d04c481dedf71fc9
   GoogleUtilities: eea970f4a389963963bffe8d8fabe43540678b9c
   GTMSessionFetcher: 36689134877faeb055b27dfa4ccc9ceaa42e029e
+  JZCalendarWeekView: 586a429ab3fbeef4f98d648ea6b801f57c5495cc
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
 
-PODFILE CHECKSUM: 8d05c5923e55c2f14468b002d649ffe8aec3e4ff
+PODFILE CHECKSUM: 6bd354a056742ddf37759187acabb974b8615565
 
 COCOAPODS: 1.10.1

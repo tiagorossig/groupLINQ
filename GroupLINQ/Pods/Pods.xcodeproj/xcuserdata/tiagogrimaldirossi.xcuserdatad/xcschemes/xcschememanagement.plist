@@ -54,6 +54,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>JZCalendarWeekView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-GroupLINQ.xcscheme</key>
 		<dict>
 			<key>isShown</key>

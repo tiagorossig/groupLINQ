@@ -7,10 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4D981AC62697BAC000DCA140 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D981AC52697BABF00DCA140 /* SignUpViewController.swift */; };
+		4D21D81F26B8E3E900730828 /* AllDayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D21D81E26B8E3E900730828 /* AllDayViewModel.swift */; };
+		4D21D82126B8E54100730828 /* AllDayEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D21D82026B8E54100730828 /* AllDayEvent.swift */; };
+		4D21D82326B8E5A200730828 /* SurveyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D21D82226B8E5A200730828 /* SurveyVC.swift */; };
+		4D21D82526B8E5DF00730828 /* LongPressWeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D21D82426B8E5DF00730828 /* LongPressWeekView.swift */; };
+		4D21D82726B8E5F800730828 /* LongPressEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D21D82626B8E5F800730828 /* LongPressEventCell.swift */; };
+		4D21D82926B8E61F00730828 /* LongPressEventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D21D82826B8E61F00730828 /* LongPressEventCell.xib */; };
+		4D21D82B26B8E6FB00730828 /* OptionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D21D82A26B8E6FB00730828 /* OptionsViewModel.swift */; };
+		4D21D82D26B8E75B00730828 /* ToastUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D21D82C26B8E75B00730828 /* ToastUtil.swift */; };
+		4D21D82F26B8E81C00730828 /* ExampleOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D21D82E26B8E81C00730828 /* ExampleOptionsViewController.swift */; };
+		4D21D83226B8E89000730828 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D21D83026B8E89000730828 /* EventCell.swift */; };
+		4D21D83326B8E89000730828 /* EventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D21D83126B8E89000730828 /* EventCell.xib */; };
+		4D21D83526B8E8AA00730828 /* DefaultEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D21D83426B8E8AA00730828 /* DefaultEvent.swift */; };
+		4D981AC62697BAC000DCA140 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D981AC52697BABF00DCA140 /* SignUpVC.swift */; };
 		4DBF339B2697B677000E8DC1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4DBF339A2697B677000E8DC1 /* GoogleService-Info.plist */; };
-		4DCF845B26B4E82600DB7FBA /* SurveyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCF845A26B4E82500DB7FBA /* SurveyVC.swift */; };
-		4DCF845D26B4EAC500DB7FBA /* NotificationsName+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCF845C26B4EAC500DB7FBA /* NotificationsName+Extensions.swift */; };
+		4DCF845D26B4EAC500DB7FBA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCF845C26B4EAC500DB7FBA /* Extensions.swift */; };
 		4DDA10E226AF47D80045BC1B /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDA10E126AF47D80045BC1B /* SettingsVC.swift */; };
 		FA3EFD6826AEC27E006F7C33 /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FA3EFD6A26AEC30F006F7C33 /* Pods_GroupLINQ.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98046D6EF24ECF320B093B5F /* Pods_GroupLINQ.framework */; };
@@ -40,10 +51,21 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		4D981AC52697BABF00DCA140 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		4D21D81E26B8E3E900730828 /* AllDayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllDayViewModel.swift; sourceTree = "<group>"; };
+		4D21D82026B8E54100730828 /* AllDayEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllDayEvent.swift; sourceTree = "<group>"; };
+		4D21D82226B8E5A200730828 /* SurveyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyVC.swift; sourceTree = "<group>"; };
+		4D21D82426B8E5DF00730828 /* LongPressWeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPressWeekView.swift; sourceTree = "<group>"; };
+		4D21D82626B8E5F800730828 /* LongPressEventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPressEventCell.swift; sourceTree = "<group>"; };
+		4D21D82826B8E61F00730828 /* LongPressEventCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LongPressEventCell.xib; sourceTree = "<group>"; };
+		4D21D82A26B8E6FB00730828 /* OptionsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsViewModel.swift; sourceTree = "<group>"; };
+		4D21D82C26B8E75B00730828 /* ToastUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastUtil.swift; sourceTree = "<group>"; };
+		4D21D82E26B8E81C00730828 /* ExampleOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleOptionsViewController.swift; sourceTree = "<group>"; };
+		4D21D83026B8E89000730828 /* EventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
+		4D21D83126B8E89000730828 /* EventCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventCell.xib; sourceTree = "<group>"; };
+		4D21D83426B8E8AA00730828 /* DefaultEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultEvent.swift; sourceTree = "<group>"; };
+		4D981AC52697BABF00DCA140 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		4DBF339A2697B677000E8DC1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		4DCF845A26B4E82500DB7FBA /* SurveyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyVC.swift; sourceTree = "<group>"; };
-		4DCF845C26B4EAC500DB7FBA /* NotificationsName+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationsName+Extensions.swift"; sourceTree = "<group>"; };
+		4DCF845C26B4EAC500DB7FBA /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		4DDA10E126AF47D80045BC1B /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		4F5FDD8A42EAA8CF18F9FCEC /* Pods-GroupLINQ.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GroupLINQ.release.xcconfig"; path = "Target Support Files/Pods-GroupLINQ/Pods-GroupLINQ.release.xcconfig"; sourceTree = "<group>"; };
 		688662615FAFBBC04C4BDB0C /* Pods-GroupLINQ.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GroupLINQ.debug.xcconfig"; path = "Target Support Files/Pods-GroupLINQ/Pods-GroupLINQ.debug.xcconfig"; sourceTree = "<group>"; };
@@ -82,6 +104,32 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		4D21D84126BAFACC00730828 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				4DCF845C26B4EAC500DB7FBA /* Extensions.swift */,
+				4D21D82C26B8E75B00730828 /* ToastUtil.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		4D21D84226BAFB3200730828 /* JZCalendar */ = {
+			isa = PBXGroup;
+			children = (
+				4D21D81E26B8E3E900730828 /* AllDayViewModel.swift */,
+				4D21D82A26B8E6FB00730828 /* OptionsViewModel.swift */,
+				4D21D82426B8E5DF00730828 /* LongPressWeekView.swift */,
+				4D21D82626B8E5F800730828 /* LongPressEventCell.swift */,
+				4D21D82026B8E54100730828 /* AllDayEvent.swift */,
+				4D21D82826B8E61F00730828 /* LongPressEventCell.xib */,
+				4D21D82E26B8E81C00730828 /* ExampleOptionsViewController.swift */,
+				4D21D83026B8E89000730828 /* EventCell.swift */,
+				4D21D83126B8E89000730828 /* EventCell.xib */,
+				4D21D83426B8E8AA00730828 /* DefaultEvent.swift */,
+			);
+			path = JZCalendar;
+			sourceTree = "<group>";
+		};
 		F179CA8122A943C162BB60AD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -115,17 +163,18 @@
 				FA461478269745ED00E4ED70 /* SceneDelegate.swift */,
 				FA46147A269745ED00E4ED70 /* ViewController.swift */,
 				FA7002E426AECDC800C63187 /* ClassDirectoryVC.swift */,
-				4D981AC52697BABF00DCA140 /* SignUpViewController.swift */,
-				FA46147C269745ED00E4ED70 /* Main.storyboard */,
-				4DCF845A26B4E82500DB7FBA /* SurveyVC.swift */,
+				FA46148F2697D26B00E4ED70 /* ClassOverviewVC.swift */,
 				4DDA10E126AF47D80045BC1B /* SettingsVC.swift */,
-				4DCF845C26B4EAC500DB7FBA /* NotificationsName+Extensions.swift */,
+				4D981AC52697BABF00DCA140 /* SignUpVC.swift */,
+				4D21D82226B8E5A200730828 /* SurveyVC.swift */,
+				FA46147C269745ED00E4ED70 /* Main.storyboard */,
+				4D21D84126BAFACC00730828 /* Utils */,
 				FA461482269745EE00E4ED70 /* Assets.xcassets */,
 				FA461484269745EE00E4ED70 /* LaunchScreen.storyboard */,
 				FA461487269745EE00E4ED70 /* Info.plist */,
 				FA46147F269745ED00E4ED70 /* GroupLINQ.xcdatamodeld */,
 				4DBF339A2697B677000E8DC1 /* GoogleService-Info.plist */,
-				FA46148F2697D26B00E4ED70 /* ClassOverviewVC.swift */,
+				4D21D84226BAFB3200730828 /* JZCalendar */,
 			);
 			path = GroupLINQ;
 			sourceTree = "<group>";
@@ -191,8 +240,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA461486269745EE00E4ED70 /* LaunchScreen.storyboard in Resources */,
+				4D21D82926B8E61F00730828 /* LongPressEventCell.xib in Resources */,
 				FA461483269745EE00E4ED70 /* Assets.xcassets in Resources */,
 				FA46147E269745ED00E4ED70 /* Main.storyboard in Resources */,
+				4D21D83326B8E89000730828 /* EventCell.xib in Resources */,
 				4DBF339B2697B677000E8DC1 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -247,15 +298,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA7002E526AECDC800C63187 /* ClassDirectoryVC.swift in Sources */,
+				4D21D82126B8E54100730828 /* AllDayEvent.swift in Sources */,
+				4D21D82526B8E5DF00730828 /* LongPressWeekView.swift in Sources */,
 				FA46147B269745ED00E4ED70 /* ViewController.swift in Sources */,
+				4D21D81F26B8E3E900730828 /* AllDayViewModel.swift in Sources */,
 				FA461477269745ED00E4ED70 /* AppDelegate.swift in Sources */,
-				4DCF845D26B4EAC500DB7FBA /* NotificationsName+Extensions.swift in Sources */,
+				4DCF845D26B4EAC500DB7FBA /* Extensions.swift in Sources */,
+				4D21D82726B8E5F800730828 /* LongPressEventCell.swift in Sources */,
+				4D21D83226B8E89000730828 /* EventCell.swift in Sources */,
+				4D21D82D26B8E75B00730828 /* ToastUtil.swift in Sources */,
+				4D21D82326B8E5A200730828 /* SurveyVC.swift in Sources */,
+				4D21D82B26B8E6FB00730828 /* OptionsViewModel.swift in Sources */,
 				FA4614902697D26B00E4ED70 /* ClassOverviewVC.swift in Sources */,
+				4D21D82F26B8E81C00730828 /* ExampleOptionsViewController.swift in Sources */,
 				FA461479269745ED00E4ED70 /* SceneDelegate.swift in Sources */,
-				4DCF845B26B4E82600DB7FBA /* SurveyVC.swift in Sources */,
+				4D21D83526B8E8AA00730828 /* DefaultEvent.swift in Sources */,
 				4DDA10E226AF47D80045BC1B /* SettingsVC.swift in Sources */,
 				FA461481269745ED00E4ED70 /* GroupLINQ.xcdatamodeld in Sources */,
-				4D981AC62697BAC000DCA140 /* SignUpViewController.swift in Sources */,
+				4D981AC62697BAC000DCA140 /* SignUpVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
