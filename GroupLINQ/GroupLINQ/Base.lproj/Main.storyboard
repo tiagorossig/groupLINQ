@@ -283,7 +283,8 @@
                                             <color key="titleColor" systemColor="labelColor"/>
                                         </state>
                                         <connections>
-                                            <segue destination="ETz-Co-5ha" kind="show" id="JVI-SP-lmZ"/>
+                                            <action selector="joinClassPressed:" destination="OtJ-Xu-b7B" eventType="touchUpInside" id="vel-No-a8I"/>
+                                            <segue destination="ETz-Co-5ha" kind="show" identifier="joinClassSegue" id="JVI-SP-lmZ"/>
                                         </connections>
                                     </button>
                                 </subviews>

@@ -78,6 +78,38 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
             
         }))
         
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    @IBAction func joinClassPressed(_ sender: Any) {
+        let alert = UIAlertController(title: "Class Code", message: "", preferredStyle: .alert)
+        
+        alert.addTextField { (textField) in
+            textField.text = ""
+        }
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+            self.className = alert.textFields![0].text!
+            
+            self.db.collection("classes").document(self.className).setData([
+                "students": [],
+                "code": self.generateClassCode(length: 6),
+                "owner": "" // TODO: initialize with current user's name
+            ]) { err in
+                if let err = err {
+                    print("Error adding document: \(err)")
+                } else {
+                    self.performSegue(withIdentifier: "joinClassSegue", sender: self)
+                }
+            }
+            
+        }))
+    
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
         self.present(alert, animated: true, completion: nil)
     }
     
