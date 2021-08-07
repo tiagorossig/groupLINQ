@@ -9,11 +9,6 @@ import UIKit
 import Firebase
 import AVFoundation
 
-extension Notification.Name {
-//    static let darkModeEnabled = Notification.Name("darkModeEnabled")
-//    static let darkModeDisabled = Notification.Name("darkModeDisabled")
-}
-
 class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var darkModeSwitch: UISwitch!
@@ -34,17 +29,13 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     }
     
     @IBAction func darkModeChanged(_ sender: Any) {
+        let userDefaults = UserDefaults.standard
         if darkModeSwitch.isOn {
-            
-//            userDefaults.set(true, forKey: "darkModeEnabled")
-
-            // Post the notification to let all current view controllers that the app has changed to dark mode, and they should theme themselves to reflect this change.
+            userDefaults.set(true, forKey: "darkModeEnabled")
             NotificationCenter.default.post(name: .darkModeEnabled, object: nil)
         }
         else {
-//            userDefaults.set(false, forKey: "darkModeEnabled")
-
-            // Post the notification to let all current view controllers that the app has changed to non-dark mode, and they should theme themselves to reflect this change.
+            userDefaults.set(false, forKey: "darkModeEnabled")
             NotificationCenter.default.post(name: .darkModeDisabled, object: nil)
         }
     }
