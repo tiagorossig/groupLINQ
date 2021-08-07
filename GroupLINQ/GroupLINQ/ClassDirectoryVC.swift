@@ -42,6 +42,10 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         return cell
     }
     
+    @IBAction func unwindToFirstViewController(_ sender: UIStoryboardSegue) {
+         // No code needed, no need to connect the IBAction explicitly
+        }
+    
     @IBAction func createClassPressed(_ sender: Any) {
         print("createClass pressed")
         let alert = UIAlertController(title: "Class Name", message: "", preferredStyle: .alert)
@@ -58,6 +62,7 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         self.present(alert, animated: true, completion: nil)
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "createClassSegue" ,
             let nextVC = segue.destination as? ClassOverviewVC {
