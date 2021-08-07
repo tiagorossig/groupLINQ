@@ -6,11 +6,12 @@
 //
 
 import UIKit
+import FirebaseFirestore
 
 var classList : [String] = ["iOS"]
 
 class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
-  
+    let db = Firestore.firestore()
     var className = ""
     @IBOutlet weak var tableView: UITableView!
     let tcID = "classTVC"
@@ -43,8 +44,13 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     @IBAction func unwindToFirstViewController(_ sender: UIStoryboardSegue) {
-         // No code needed, no need to connect the IBAction explicitly
-        }
+        // No code needed, no need to connect the IBAction explicitly
+    }
+    
+    func generateClassCode(length: Int) -> String {
+      let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+      return String((0..<length).map{ _ in letters.randomElement()! })
+    }
     
     @IBAction func createClassPressed(_ sender: Any) {
         print("createClass pressed")
@@ -57,7 +63,19 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
             print("createClass OK pressed")
             self.className = alert.textFields![0].text!
-            self.performSegue(withIdentifier: "createClassSegue", sender: self)
+            
+            self.db.collection("classes").document(self.className).setData([
+                "students": [],
+                "code": self.generateClassCode(length: 6),
+                "owner": "" // TODO: initialize with current user's name
+            ]) { err in
+                if let err = err {
+                    print("Error adding document: \(err)")
+                } else {
+                    self.performSegue(withIdentifier: "createClassSegue", sender: self)
+                }
+            }
+            
         }))
         
         self.present(alert, animated: true, completion: nil)

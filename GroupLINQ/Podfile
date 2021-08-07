@@ -9,5 +9,7 @@ target 'GroupLINQ' do
   pod 'Firebase'
   pod 'Firebase/Analytics'
   pod 'Firebase/Auth'
+  pod 'Firebase/Firestore'
+  pod 'FirebaseFirestoreSwift'
   pod 'JZCalendarWeekView'
 end

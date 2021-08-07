@@ -380,6 +380,7 @@
                     <navigationItem key="navigationItem" id="xsW-db-oM5"/>
                     <connections>
                         <outlet property="classNameLabel" destination="czD-VR-sXY" id="N9t-00-zVG"/>
+                        <outlet property="codeLabel" destination="qQk-jd-0EK" id="YLI-yn-x3A"/>
                         <outlet property="tableView" destination="fEM-pz-4P0" id="p0f-zl-lry"/>
                     </connections>
                 </viewController>
