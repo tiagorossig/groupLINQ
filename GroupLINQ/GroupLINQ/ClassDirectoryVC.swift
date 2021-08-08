@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import FirebaseFirestore
+import Firebase
 
 var classList : [String] = ["iOS"]
 
@@ -92,20 +92,19 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         }
         
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
-            self.className = alert.textFields![0].text!
-            
-            self.db.collection("classes").document(self.className).setData([
-                "students": [],
-                "code": self.generateClassCode(length: 6),
-                "owner": "" // TODO: initialize with current user's name
-            ]) { err in
-                if let err = err {
-                    print("Error adding document: \(err)")
-                } else {
-                    self.performSegue(withIdentifier: "joinClassSegue", sender: self)
-                }
+            self.db.collection("classes").whereField("code", isEqualTo: alert.textFields![0].text!)
+                .getDocuments() { (querySnapshot, err) in
+                    if let err = err {
+                        print("Error getting documents: \(err)")
+                    } else {
+                        assert(querySnapshot?.count == 1)
+                        let id = querySnapshot!.documents[0].documentID
+                        self.db.collection("classes").document(id).updateData([
+                            "students": FieldValue.arrayUnion([Auth.auth().currentUser?.uid])
+                        ])
+                        self.performSegue(withIdentifier: "joinClassSegue", sender: self)
+                    }
             }
-            
         }))
     
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
