@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1879FD2E26C15D7A008B35E1 /* YourTeamVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1879FD2D26C15D7A008B35E1 /* YourTeamVC.swift */; };
+		1879FD3026C15DA0008B35E1 /* MemberScheduleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1879FD2F26C15DA0008B35E1 /* MemberScheduleVC.swift */; };
 		4D21D81F26B8E3E900730828 /* AllDayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D21D81E26B8E3E900730828 /* AllDayViewModel.swift */; };
 		4D21D82126B8E54100730828 /* AllDayEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D21D82026B8E54100730828 /* AllDayEvent.swift */; };
 		4D21D82326B8E5A200730828 /* SurveyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D21D82226B8E5A200730828 /* SurveyVC.swift */; };
@@ -51,6 +53,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1879FD2D26C15D7A008B35E1 /* YourTeamVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourTeamVC.swift; sourceTree = "<group>"; };
+		1879FD2F26C15DA0008B35E1 /* MemberScheduleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberScheduleVC.swift; sourceTree = "<group>"; };
 		4D21D81E26B8E3E900730828 /* AllDayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllDayViewModel.swift; sourceTree = "<group>"; };
 		4D21D82026B8E54100730828 /* AllDayEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllDayEvent.swift; sourceTree = "<group>"; };
 		4D21D82226B8E5A200730828 /* SurveyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyVC.swift; sourceTree = "<group>"; };
@@ -167,6 +171,8 @@
 				4DDA10E126AF47D80045BC1B /* SettingsVC.swift */,
 				4D981AC52697BABF00DCA140 /* SignUpVC.swift */,
 				4D21D82226B8E5A200730828 /* SurveyVC.swift */,
+				1879FD2D26C15D7A008B35E1 /* YourTeamVC.swift */,
+				1879FD2F26C15DA0008B35E1 /* MemberScheduleVC.swift */,
 				FA46147C269745ED00E4ED70 /* Main.storyboard */,
 				4D21D84126BAFACC00730828 /* Utils */,
 				FA461482269745EE00E4ED70 /* Assets.xcassets */,
@@ -310,11 +316,13 @@
 				4D21D82326B8E5A200730828 /* SurveyVC.swift in Sources */,
 				4D21D82B26B8E6FB00730828 /* OptionsViewModel.swift in Sources */,
 				FA4614902697D26B00E4ED70 /* ClassOverviewVC.swift in Sources */,
+				1879FD3026C15DA0008B35E1 /* MemberScheduleVC.swift in Sources */,
 				4D21D82F26B8E81C00730828 /* ExampleOptionsViewController.swift in Sources */,
 				FA461479269745ED00E4ED70 /* SceneDelegate.swift in Sources */,
 				4D21D83526B8E8AA00730828 /* DefaultEvent.swift in Sources */,
 				4DDA10E226AF47D80045BC1B /* SettingsVC.swift in Sources */,
 				FA461481269745ED00E4ED70 /* GroupLINQ.xcdatamodeld in Sources */,
+				1879FD2E26C15D7A008B35E1 /* YourTeamVC.swift in Sources */,
 				4D981AC62697BAC000DCA140 /* SignUpVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
