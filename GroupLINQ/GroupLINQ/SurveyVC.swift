@@ -8,11 +8,13 @@
 
 import UIKit
 import JZCalendarWeekView
+import Firebase
 
 class SurveyVC: UIViewController {
 
     @IBOutlet weak var calendarWeekView: JZLongPressWeekView!
     let viewModel = AllDayViewModel()
+    let db = Firestore.firestore()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +39,16 @@ class SurveyVC: UIViewController {
         JZWeekViewHelper.viewTransitionHandler(to: size, weekView: calendarWeekView)
     }
 
+    @IBAction func submitPressed(_ sender: Any) {
+        var timestamps: [Timestamp] = []
+        for event in viewModel.events {
+            timestamps.append(Timestamp(date: event.startDate))
+        }
+        self.db.collection("users").document(Auth.auth().currentUser!.uid).updateData([
+            "availableTimes": timestamps
+        ])
+    }
+    
     private func setupCalendarView() {
         calendarWeekView.baseDelegate = self
 
