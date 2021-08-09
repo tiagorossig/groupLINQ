@@ -8,7 +8,7 @@
 import UIKit
 import Firebase
 
-var classList : [String] = ["iOS"]
+var classList : [String] = []
 
 class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let db = Firestore.firestore()
@@ -20,6 +20,18 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        
+        self.db.collection("classes").whereField("students", arrayContains: Auth.auth().currentUser?.uid)
+            .getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        classList.append(document.documentID)
+                    }
+                    self.tableView.reloadData()
+                }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
