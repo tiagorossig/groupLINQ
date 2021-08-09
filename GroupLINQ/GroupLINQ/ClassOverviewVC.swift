@@ -16,6 +16,7 @@ class ClassOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     @IBOutlet weak var classNameLabel: UILabel!
     @IBOutlet weak var codeLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var groupSizeField: UITextField!
     
     let db = Firestore.firestore()
     var className = ""
@@ -68,4 +69,31 @@ class ClassOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+//    @IBAction func makeGroupPressed(_ sender: Any) {
+//        print("makeGroup pressed")
+//
+//        let leftOver = students?.count ?? 0 % Int(groupSizeField.text)
+//
+//        let numGroups = Int(groupSizeField.text)
+//
+//        for i in 0...numGroups {
+//            self.db.collection("groups").document(getTimeEpoch()).setData([
+//                "class": code,
+//                "times": self.generateClassCode(length: 6),
+//                "members": "" // TODO: initialize with current user's name
+//            ]) { err in
+//                if let err = err {
+//                    print("Error adding document: \(err)")
+//                } else {
+//                    self.performSegue(withIdentifier: "createClassSegue", sender: self)
+//                }
+//            }
+//        }
+        
+//    }
+//
+//    const getTimeEpoch = () => {
+//        return new Date().getTime().toString();
+//    }
 }

@@ -18,10 +18,17 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // dark mode
         NotificationCenter.default.addObserver(self, selector: #selector(darkModeEnabled(_:)), name: .darkModeEnabled, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(darkModeDisabled(_:)), name: .darkModeDisabled, object: nil)
+        
+        // picture
         picker.delegate = self
     }
+    
+    
+    //    DARK MODE    \\
     
     deinit {
         NotificationCenter.default.removeObserver(self, name: .darkModeEnabled, object: nil)
@@ -48,6 +55,9 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         overrideUserInterfaceStyle = .light
     }
     
+    
+    //    AUTH    \\
+    
     @IBAction func logoutPressed(_ sender: Any) {
         do {
             try Auth.auth().signOut()
@@ -66,6 +76,9 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(loginNavController)
     }
     
+    
+    //    PICTURE   \\
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         let chosenImage = info[.originalImage] as! UIImage
@@ -78,13 +91,48 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
         print("User cancelled")
-
     }
     
     @IBAction func profilePicturePressed(_ sender: Any) {
+        let controller = UIAlertController(
+            title: "Select picture",
+            message: nil,
+            preferredStyle: .alert
+        )
+        let library = UIAlertAction(
+            title: "Library",
+            style: .default,
+            handler: {(action) in self.librarySelected(self)}
+        )
+        let camera = UIAlertAction(
+            title: "Camera",
+            style: .default,
+            handler: {(action) in self.cameraSelected(self)}
+        )
         
+        controller.addAction(library)
+        controller.addAction(camera)
+        
+        present(controller, animated: true) {
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissAlertController))
+            controller.view.superview?.subviews[0].addGestureRecognizer(tapGesture)
+        }
+    }
+    
+    // dismiss alert when tapping outside of it
+    @objc func dismissAlertController(){
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func librarySelected(_ sender: Any) {
+        picker.allowsEditing = false
+        picker.sourceType = .photoLibrary
+        
+        present(picker, animated: true, completion: nil)
+    }
+    
+    func cameraSelected(_ sender: Any) {
         if UIImagePickerController.availableCaptureModes(for: .rear) != nil {
-            
             // there is a rear camera!
             switch AVCaptureDevice.authorizationStatus(for: .video) {
             case .notDetermined:
@@ -100,7 +148,6 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
             }
             
             // We are authorized to use the camera
-            
             picker.allowsEditing = false
             picker.sourceType = .camera
             picker.cameraCaptureMode = .photo
@@ -108,9 +155,7 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
             present(picker, animated: true, completion: nil)
             
         } else {
-        
             // if no camera is available, pop up an alert
-            
             let alertVC = UIAlertController(
                 title: "No camera",
                 message: "Sorry, this device has no camera",
@@ -123,9 +168,8 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
                 handler: nil
             )
             alertVC.addAction(okAction)
-            present(alertVC, animated:true, completion:nil)
+            
+            present(alertVC, animated: true, completion: nil)
         }
-    
     }
-    
 }
