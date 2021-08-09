@@ -6,9 +6,9 @@
 //
 
 import UIKit
-import FirebaseFirestore
+import Firebase
 
-var classList : [String] = ["iOS"]
+var classList : [String] = []
 
 class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let db = Firestore.firestore()
@@ -20,6 +20,18 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        
+        self.db.collection("classes").whereField("students", arrayContains: Auth.auth().currentUser?.uid)
+            .getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        classList.append(document.documentID)
+                    }
+                    self.tableView.reloadData()
+                }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -92,20 +104,24 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         }
         
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
-            self.className = alert.textFields![0].text!
-            
-            self.db.collection("classes").document(self.className).setData([
-                "students": [],
-                "code": self.generateClassCode(length: 6),
-                "owner": "" // TODO: initialize with current user's name
-            ]) { err in
-                if let err = err {
-                    print("Error adding document: \(err)")
-                } else {
-                    self.performSegue(withIdentifier: "joinClassSegue", sender: self)
-                }
+            self.db.collection("classes").whereField("code", isEqualTo: alert.textFields![0].text!)
+                .getDocuments() { (querySnapshot, err) in
+                    if let err = err {
+                        print("Error getting documents: \(err)")
+                    } else {
+                        guard querySnapshot?.count == 1 else {
+                            let invalidAlert = UIAlertController(title: "Invalid class code.", message: "", preferredStyle: .alert)
+                            invalidAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                            self.present(invalidAlert, animated: true, completion: nil)
+                            return
+                        }
+                        let id = querySnapshot!.documents[0].documentID
+                        self.db.collection("classes").document(id).updateData([
+                            "students": FieldValue.arrayUnion([Auth.auth().currentUser?.uid])
+                        ])
+                        self.performSegue(withIdentifier: "joinClassSegue", sender: self)
+                    }
             }
-            
         }))
     
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
