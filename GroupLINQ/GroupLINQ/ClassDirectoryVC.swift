@@ -97,7 +97,12 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                     if let err = err {
                         print("Error getting documents: \(err)")
                     } else {
-                        assert(querySnapshot?.count == 1)
+                        guard querySnapshot?.count == 1 else {
+                            let invalidAlert = UIAlertController(title: "Invalid class code.", message: "", preferredStyle: .alert)
+                            invalidAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                            self.present(invalidAlert, animated: true, completion: nil)
+                            return
+                        }
                         let id = querySnapshot!.documents[0].documentID
                         self.db.collection("classes").document(id).updateData([
                             "students": FieldValue.arrayUnion([Auth.auth().currentUser?.uid])
