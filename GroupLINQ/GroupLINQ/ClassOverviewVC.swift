@@ -49,6 +49,16 @@ class ClassOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSou
 
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        let userDefaults = UserDefaults.standard
+        if userDefaults.bool(forKey: "darkModeEnabled") {
+            overrideUserInterfaceStyle = .dark
+        }
+        else {
+            overrideUserInterfaceStyle = .light
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data.count
     }

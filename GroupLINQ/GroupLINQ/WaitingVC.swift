@@ -1,18 +1,16 @@
 //
-//  MemberScheduleVC.swift
+//  WaitingVC.swift
 //  GroupLINQ
 //
-//  Created by Bagaria on 8/9/21.
+//  Created by Erika Tan on 8/9/21.
 //
 
 import UIKit
 
-class MemberScheduleVC: UIViewController {
+class WaitingVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {

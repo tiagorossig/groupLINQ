@@ -13,6 +13,7 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     
     @IBOutlet weak var darkModeSwitch: UISwitch!
     @IBOutlet weak var imageView: UIImageView!
+    let userDefaults = UserDefaults.standard
     
     let picker = UIImagePickerController()
     
@@ -22,9 +23,19 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         // dark mode
         NotificationCenter.default.addObserver(self, selector: #selector(darkModeEnabled(_:)), name: .darkModeEnabled, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(darkModeDisabled(_:)), name: .darkModeDisabled, object: nil)
+        darkModeSwitch.isOn = userDefaults.bool(forKey: "darkModeEnabled")
         
         // picture
         picker.delegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if userDefaults.bool(forKey: "darkModeEnabled") {
+            overrideUserInterfaceStyle = .dark
+        }
+        else {
+            overrideUserInterfaceStyle = .light
+        }
     }
     
     
