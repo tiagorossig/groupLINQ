@@ -13,6 +13,7 @@ public let data = ["Tiago", "Anisha", "Erika", "Bulko"]
 let memberCellIdentifier = "MemberCell"
 
 class ClassOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
     @IBOutlet weak var classNameLabel: UILabel!
     @IBOutlet weak var codeLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
