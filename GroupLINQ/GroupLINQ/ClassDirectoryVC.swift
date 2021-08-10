@@ -9,6 +9,7 @@ import UIKit
 import Firebase
 
 var classList : [String] = []
+var statusList: [String] = []
 
 class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let db = Firestore.firestore()
@@ -32,6 +33,7 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         }
         
         classList = []
+        statusList = []
         
         self.db.collection("classes").whereField("students", arrayContains: Auth.auth().currentUser?.uid)
             .getDocuments() { (querySnapshot, err) in
@@ -40,6 +42,7 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                 } else {
                     for document in querySnapshot!.documents {
                         classList.append(document.documentID)
+                        statusList.append("Member")
                     }
                     
                     self.db.collection("classes").whereField("owner", isEqualTo: Auth.auth().currentUser?.uid)
@@ -49,8 +52,8 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                             } else {
                                 for document in querySnapshot!.documents {
                                     classList.append(document.documentID)
+                                    statusList.append("Owner")
                                 }
-                                
                                 self.tableView.reloadData()
                             }
                     }
@@ -65,24 +68,35 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell =  tableView.dequeueReusableCell(withIdentifier: tcID, for: indexPath as IndexPath)
         let row = indexPath.row
-        cell.textLabel?.text = "Class \(row): \(classList[row])"
+        cell.textLabel?.text = "Class \(row): \(classList[row])\n\(statusList[row])"
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let row = indexPath.row
-        let group = self.db.collection("groups").whereField("class", isEqualTo: classList[row]).whereField("members", arrayContains: Auth.auth().currentUser?.uid)
-            .getDocuments() { (querySnapshot, err) in
-                    if let err = err {
-                        print("Error getting documents: \(err)")
-                    } else {
-                        if querySnapshot!.isEmpty {
-                            self.performSegue(withIdentifier: "waitingSegue", sender: self)
-                        }else{
-                            self.performSegue(withIdentifier: "teamResultsSegue", sender: self)
+        
+        self.db.collection("classes").document(classList[row]).getDocument {
+            (document, error) in
+            if let document = document {
+                if document.data()?["owner"] as! String == Auth.auth().currentUser?.uid {
+                    self.className = classList[row]
+                    self.performSegue(withIdentifier: "createClassSegue", sender: self)
+                } else {
+                    let group = self.db.collection("groups").whereField("class", isEqualTo: classList[row]).whereField("members", arrayContains: Auth.auth().currentUser?.uid)
+                        .getDocuments() { (querySnapshot, err) in
+                                if let err = err {
+                                    print("Error getting documents: \(err)")
+                                } else {
+                                    if querySnapshot!.isEmpty {
+                                        self.performSegue(withIdentifier: "waitingSegue", sender: self)
+                                    }else{
+                                        self.performSegue(withIdentifier: "teamResultsSegue", sender: self)
+                                    }
+                                }
                         }
-                    }
+                }
             }
+        }
     }
     
     @IBAction func unwindToFirstViewController(_ sender: UIStoryboardSegue) {
