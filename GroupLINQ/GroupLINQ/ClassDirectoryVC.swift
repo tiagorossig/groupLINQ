@@ -113,7 +113,6 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     @IBAction func createClassPressed(_ sender: Any) {
-        print("createClass pressed")
         let alert = UIAlertController(title: "Class Name", message: "", preferredStyle: .alert)
         
         alert.addTextField { (textField) in
@@ -121,22 +120,34 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         }
         
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
-            print("createClass OK pressed")
             self.className = alert.textFields![0].text!
             
-            self.db.collection("classes").document(self.className).setData([
-                "students": [],
-                "code": self.generateClassCode(length: 6),
-                "owner": Auth.auth().currentUser?.uid
-            ]) { err in
-                if let err = err {
-                    print("Error adding document: \(err)")
-                } else {
-                    self.getClasses()
-                    self.performSegue(withIdentifier: "createClassSegue", sender: self)
+            // check if this class already exists first
+            let docRef = self.db.collection("classes").document(self.className)
+            docRef.getDocument { (document, error) in
+                if let document = document {
+                    if document.exists {
+                        let existsAlert = UIAlertController(title: "Class name already exists.", message: "", preferredStyle: .alert)
+                        existsAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                        self.present(existsAlert, animated: true, completion: nil)
+                        // it exists so fast fail
+                        return
+                    } else {
+                        self.db.collection("classes").document(self.className).setData([
+                            "students": [],
+                            "code": self.generateClassCode(length: 6),
+                            "owner": Auth.auth().currentUser?.uid
+                        ]) { err in
+                            if let err = err {
+                                print("Error adding document: \(err)")
+                            } else {
+                                self.getClasses()
+                                self.performSegue(withIdentifier: "createClassSegue", sender: self)
+                            }
+                        }
+                    }
                 }
             }
-            
         }))
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
