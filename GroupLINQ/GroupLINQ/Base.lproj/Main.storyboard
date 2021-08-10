@@ -594,6 +594,9 @@
                                         <state key="normal" title="Change password">
                                             <color key="titleColor" systemColor="labelColor"/>
                                         </state>
+                                        <connections>
+                                            <action selector="changePasswordPressed:" destination="CDV-ds-MyY" eventType="touchUpInside" id="fwn-ny-ywg"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
