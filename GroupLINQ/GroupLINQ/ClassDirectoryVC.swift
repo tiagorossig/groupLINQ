@@ -55,6 +55,22 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         return cell
     }
     
+    /*func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let row = indexPath.row
+        print(classList[row])
+        self.db.collection("groups").whereField("class", isEqualTo: classList[row]).whereField("members", arrayContains: Auth.auth().currentUser?.uid)
+                .getDocuments() { (querySnapshot, err) in
+                    if let err = err {
+                        self.performSegue(withIdentifier: "waitingSegue", sender: self)
+                    } else {
+                        for document in querySnapshot!.documents {
+                            classList.append(document.documentID)
+                        }
+                        self.tableView.reloadData()
+                    }
+            }
+    }*/
+    
     @IBAction func unwindToFirstViewController(_ sender: UIStoryboardSegue) {
         // No code needed, no need to connect the IBAction explicitly
     }
