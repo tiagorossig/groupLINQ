@@ -365,7 +365,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Class Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IQX-dd-Naf">
-                                        <rect key="frame" x="52" y="82" width="175" height="41"/>
+                                        <rect key="frame" x="52" y="82" width="335" height="41"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="34"/>
                                         <nil key="textColor"/>
@@ -419,6 +419,13 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Students" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9KX-l8-VwM">
+                                <rect key="frame" x="20" y="179" width="388" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="cdR-lX-OTn"/>
                         <color key="backgroundColor" red="0.89019607840000003" green="0.93333333330000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -428,6 +435,7 @@
                         <outlet property="classNameLabel" destination="IQX-dd-Naf" id="WfG-4k-hnX"/>
                         <outlet property="codeLabel" destination="qQk-jd-0EK" id="YLI-yn-x3A"/>
                         <outlet property="groupSizeField" destination="BAz-5I-tGW" id="lpM-g8-DEW"/>
+                        <outlet property="studentsLabel" destination="9KX-l8-VwM" id="b4i-7n-AKZ"/>
                         <outlet property="tableView" destination="fEM-pz-4P0" id="p0f-zl-lry"/>
                     </connections>
                 </viewController>
