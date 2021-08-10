@@ -163,7 +163,7 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                         self.db.collection("classes").document(id).updateData([
                             "students": FieldValue.arrayUnion([Auth.auth().currentUser?.uid])
                         ])
-                        self.performSegue(withIdentifier: "joinClassSegue", sender: self)
+                        self.performSegue(withIdentifier: "waitingSegue", sender: self)
                     }
             }
         }))

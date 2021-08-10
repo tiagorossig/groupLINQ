@@ -99,7 +99,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Log In"/>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="nHa-9F-vGD"/>
+                                    <segue destination="V2I-Kc-ONX" kind="unwind" unwindAction="unwindToFirstViewController:" id="uUj-iL-mfj"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Full Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nSZ-PJ-WI9">
@@ -152,9 +152,11 @@
                         <outlet property="nameTextField" destination="nSZ-PJ-WI9" id="4ow-4g-xfI"/>
                         <outlet property="passwordTextField" destination="aaE-Gn-KNm" id="m85-25-mPm"/>
                         <outlet property="phoneNumberTextField" destination="Zxy-d6-X8m" id="Y9i-fC-9Nb"/>
+                        <segue destination="ETz-Co-5ha" kind="show" identifier="surveySegue" id="48j-pl-RaW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yRS-oD-xEF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="V2I-Kc-ONX" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1871.4953271028037" y="75.809935205183592"/>
         </scene>
@@ -163,7 +165,7 @@
             <objects>
                 <viewController id="ETz-Co-5ha" customClass="SurveyVC" customModule="GroupLINQ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bo7-r3-nNK">
-                        <rect key="frame" x="0.0" y="0.0" width="428" height="872"/>
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ztf-zt-ish">
@@ -177,8 +179,7 @@
                                             <color key="titleColor" systemColor="labelColor"/>
                                         </state>
                                         <connections>
-                                            <action selector="joinClassPressed:" destination="OtJ-Xu-b7B" eventType="touchUpInside" id="11h-HI-pdB"/>
-                                            <segue destination="Pz3-EV-ajK" kind="show" id="Gic-QZ-sLS"/>
+                                            <action selector="submitPressed:" destination="ETz-Co-5ha" eventType="touchUpInside" id="KhY-gz-Qe5"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -226,7 +227,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OJR-tu-IUa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2957.9439252336447" y="123.75809935205184"/>
+            <point key="canvasLocation" x="2762" y="75"/>
         </scene>
         <!--Home-->
         <scene sceneID="GcX-Jg-Q3c">
@@ -308,7 +309,6 @@
                                         </state>
                                         <connections>
                                             <action selector="joinClassPressed:" destination="OtJ-Xu-b7B" eventType="touchUpInside" id="vel-No-a8I"/>
-                                            <segue destination="ETz-Co-5ha" kind="show" identifier="joinClassSegue" id="JVI-SP-lmZ"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -802,10 +802,6 @@
             <point key="canvasLocation" x="5395.794392523364" y="123.75809935205184"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="MGH-qI-1Jm"/>
-        <segue reference="TWZ-J6-mYQ"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <image name="Logo" width="2236" height="1040"/>
         <image name="gearshape" catalog="system" width="128" height="121"/>

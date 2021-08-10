@@ -21,12 +21,23 @@ class SignUpVC: UIViewController {
     }
     
     @IBAction func signupPressed(_ sender: Any) {
-        guard let email = emailTextField.text,
+        guard let name = nameTextField.text,
+              let phone = phoneNumberTextField.text,
+              let email = emailTextField.text,
               let password = passwordTextField.text,
+              name.count > 0,
+              phone.count > 0,
               email.count > 0,
               password.count > 0
         else {
-          return
+            let alert = UIAlertController(
+                title: "Sign up failed",
+                message: "One or more fields were left blank",
+                preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title:"OK",style:.default))
+            self.present(alert, animated: true, completion: nil)
+            return
         }
         Auth.auth().createUser(withEmail: email, password: password, completion: { user, error in
             let currentUser = Auth.auth().currentUser
@@ -41,12 +52,7 @@ class SignUpVC: UIViewController {
                     if let err = err {
                         print("Error adding document: \(err)")
                     } else {
-                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                        let mainTabBarController = storyboard.instantiateViewController(identifier: "MainTabBarController")
-
-                        // This is to get the SceneDelegate object from your view controller
-                        // then call the change root view controller function to change to main tab bar
-                        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
+                        self.performSegue(withIdentifier: "surveySegue", sender: self)
                     }
                 }
             }
