@@ -6,13 +6,40 @@
 //
 
 import UIKit
+import Firebase
+var teammates : [String] = []
 
-class YourTeamVC: UIViewController {
-
+class YourTeamVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
+    let db = Firestore.firestore()
+    @IBOutlet weak var tableView: UITableView!
+    let tcID = "teamMemberCell"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        tableView.delegate = self
+        tableView.dataSource = self
+        self.db.collection("groups").whereField("members", arrayContains: Auth.auth().currentUser?.uid)
+            .getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        teammates.append(document.documentID)
+                    }
+                    self.tableView.reloadData()
+                }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return teammates.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell =  tableView.dequeueReusableCell(withIdentifier: tcID, for: indexPath as IndexPath)
+        let row = indexPath.row
+        cell.textLabel?.text = teammates[row]
+        return cell
     }
     
     override func viewWillAppear(_ animated: Bool) {
