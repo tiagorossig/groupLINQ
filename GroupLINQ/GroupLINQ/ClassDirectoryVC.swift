@@ -20,18 +20,6 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        
-        self.db.collection("classes").whereField("students", arrayContains: Auth.auth().currentUser?.uid)
-            .getDocuments() { (querySnapshot, err) in
-                if let err = err {
-                    print("Error getting documents: \(err)")
-                } else {
-                    for document in querySnapshot!.documents {
-                        classList.append(document.documentID)
-                    }
-                    self.tableView.reloadData()
-                }
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,6 +29,32 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         }
         else {
             overrideUserInterfaceStyle = .light
+        }
+        
+        classList = []
+        
+        self.db.collection("classes").whereField("students", arrayContains: Auth.auth().currentUser?.uid)
+            .getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        classList.append(document.documentID)
+                    }
+                    
+                    self.db.collection("classes").whereField("owner", isEqualTo: Auth.auth().currentUser?.uid)
+                        .getDocuments() { (querySnapshot, err) in
+                            if let err = err {
+                                print("Error getting documents: \(err)")
+                            } else {
+                                for document in querySnapshot!.documents {
+                                    classList.append(document.documentID)
+                                }
+                                
+                                self.tableView.reloadData()
+                            }
+                    }
+                }
         }
     }
     
@@ -95,7 +109,7 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
             self.db.collection("classes").document(self.className).setData([
                 "students": [],
                 "code": self.generateClassCode(length: 6),
-                "owner": "" // TODO: initialize with current user's name
+                "owner": Auth.auth().currentUser?.uid
             ]) { err in
                 if let err = err {
                     print("Error adding document: \(err)")
