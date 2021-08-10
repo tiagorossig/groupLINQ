@@ -32,6 +32,10 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
             overrideUserInterfaceStyle = .light
         }
         
+        getClasses()
+    }
+    
+    func getClasses() {
         classList = []
         statusList = []
         
@@ -128,6 +132,7 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                 if let err = err {
                     print("Error adding document: \(err)")
                 } else {
+                    self.getClasses()
                     self.performSegue(withIdentifier: "createClassSegue", sender: self)
                 }
             }
