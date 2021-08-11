@@ -9,6 +9,7 @@ import UIKit
 import Firebase
 
 var classList : [String] = []
+var statusList: [String] = []
 
 class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let db = Firestore.firestore()
@@ -20,18 +21,6 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        
-        self.db.collection("classes").whereField("students", arrayContains: Auth.auth().currentUser?.uid)
-            .getDocuments() { (querySnapshot, err) in
-                if let err = err {
-                    print("Error getting documents: \(err)")
-                } else {
-                    for document in querySnapshot!.documents {
-                        classList.append(document.documentID)
-                    }
-                    self.tableView.reloadData()
-                }
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -42,6 +31,38 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         else {
             overrideUserInterfaceStyle = .light
         }
+        
+        getClasses()
+    }
+    
+    func getClasses() {
+        classList = []
+        statusList = []
+        
+        self.db.collection("classes").whereField("students", arrayContains: Auth.auth().currentUser?.uid)
+            .getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        classList.append(document.documentID)
+                        statusList.append("Member")
+                    }
+                    
+                    self.db.collection("classes").whereField("owner", isEqualTo: Auth.auth().currentUser?.uid)
+                        .getDocuments() { (querySnapshot, err) in
+                            if let err = err {
+                                print("Error getting documents: \(err)")
+                            } else {
+                                for document in querySnapshot!.documents {
+                                    classList.append(document.documentID)
+                                    statusList.append("Owner")
+                                }
+                                self.tableView.reloadData()
+                            }
+                    }
+                }
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -51,8 +72,35 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell =  tableView.dequeueReusableCell(withIdentifier: tcID, for: indexPath as IndexPath)
         let row = indexPath.row
-        cell.textLabel?.text = "Class \(row): \(classList[row])"
+        cell.textLabel?.text = "Class \(row): \(classList[row])\n\(statusList[row])"
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let row = indexPath.row
+        
+        self.db.collection("classes").document(classList[row]).getDocument {
+            (document, error) in
+            if let document = document {
+                if document.data()?["owner"] as! String == Auth.auth().currentUser?.uid {
+                    self.className = classList[row]
+                    self.performSegue(withIdentifier: "createClassSegue", sender: self)
+                } else {
+                    let group = self.db.collection("groups").whereField("class", isEqualTo: classList[row]).whereField("members", arrayContains: Auth.auth().currentUser?.uid)
+                        .getDocuments() { (querySnapshot, err) in
+                                if let err = err {
+                                    print("Error getting documents: \(err)")
+                                } else {
+                                    if querySnapshot!.isEmpty {
+                                        self.performSegue(withIdentifier: "waitingSegue", sender: self)
+                                    }else{
+                                        self.performSegue(withIdentifier: "teamResultsSegue", sender: self)
+                                    }
+                                }
+                        }
+                }
+            }
+        }
     }
     
     @IBAction func unwindToFirstViewController(_ sender: UIStoryboardSegue) {
@@ -65,7 +113,6 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     @IBAction func createClassPressed(_ sender: Any) {
-        print("createClass pressed")
         let alert = UIAlertController(title: "Class Name", message: "", preferredStyle: .alert)
         
         alert.addTextField { (textField) in
@@ -73,21 +120,34 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         }
         
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
-            print("createClass OK pressed")
             self.className = alert.textFields![0].text!
             
-            self.db.collection("classes").document(self.className).setData([
-                "students": [],
-                "code": self.generateClassCode(length: 6),
-                "owner": "" // TODO: initialize with current user's name
-            ]) { err in
-                if let err = err {
-                    print("Error adding document: \(err)")
-                } else {
-                    self.performSegue(withIdentifier: "createClassSegue", sender: self)
+            // check if this class already exists first
+            let docRef = self.db.collection("classes").document(self.className)
+            docRef.getDocument { (document, error) in
+                if let document = document {
+                    if document.exists {
+                        let existsAlert = UIAlertController(title: "Class name already exists.", message: "", preferredStyle: .alert)
+                        existsAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                        self.present(existsAlert, animated: true, completion: nil)
+                        // it exists so fast fail
+                        return
+                    } else {
+                        self.db.collection("classes").document(self.className).setData([
+                            "students": [],
+                            "code": self.generateClassCode(length: 6),
+                            "owner": Auth.auth().currentUser?.uid
+                        ]) { err in
+                            if let err = err {
+                                print("Error adding document: \(err)")
+                            } else {
+                                self.getClasses()
+                                self.performSegue(withIdentifier: "createClassSegue", sender: self)
+                            }
+                        }
+                    }
                 }
             }
-            
         }))
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -119,7 +179,7 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                         self.db.collection("classes").document(id).updateData([
                             "students": FieldValue.arrayUnion([Auth.auth().currentUser?.uid])
                         ])
-                        self.performSegue(withIdentifier: "joinClassSegue", sender: self)
+                        self.performSegue(withIdentifier: "waitingSegue", sender: self)
                     }
             }
         }))

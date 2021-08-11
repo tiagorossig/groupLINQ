@@ -14,6 +14,7 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     
     @IBOutlet weak var darkModeSwitch: UISwitch!
     @IBOutlet weak var imageView: UIImageView!
+    let userDefaults = UserDefaults.standard
     
     let storage = Storage.storage().reference()
     let picker = UIImagePickerController()
@@ -24,7 +25,7 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         // dark mode
         NotificationCenter.default.addObserver(self, selector: #selector(darkModeEnabled(_:)), name: .darkModeEnabled, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(darkModeDisabled(_:)), name: .darkModeDisabled, object: nil)
-        overrideUserInterfaceStyle = darkModeSwitch.isOn ? .dark : .light
+        darkModeSwitch.isOn = userDefaults.bool(forKey: "darkModeEnabled")
         
         // picture
 //        imageView.layer.borderWidth = 1.0
@@ -52,6 +53,15 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         })
         
         task.resume()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if userDefaults.bool(forKey: "darkModeEnabled") {
+            overrideUserInterfaceStyle = .dark
+        }
+        else {
+            overrideUserInterfaceStyle = .light
+        }
     }
     
     
@@ -84,6 +94,63 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     
     
     //    AUTH    \\
+    @IBAction func changePasswordPressed(_ sender: Any) {
+        let alert = UIAlertController(title: "Change Password", message: "Enter your current password", preferredStyle: .alert)
+        
+        alert.addTextField { (textField) in
+            textField.text = ""
+            textField.isSecureTextEntry = true
+        }
+        
+        alert.addAction(UIAlertAction(title: "Submit", style: .default, handler: { (action) in
+            let currPass = alert.textFields![0].text!
+            
+            Auth.auth().signIn(withEmail: (Auth.auth().currentUser?.email)!, password: currPass) {
+                user, error in
+                if let error = error, user == nil {
+                    let passwordDoesNotMatchAlert = UIAlertController(
+                      title: "Password does not match current password.",
+                      message: error.localizedDescription,
+                      preferredStyle: .alert)
+
+                    passwordDoesNotMatchAlert.addAction(UIAlertAction(title:"OK",style:.default))
+                    self.present(passwordDoesNotMatchAlert, animated: true, completion: nil)
+                }
+                if error == nil {
+                    let newPasswordAlert = UIAlertController(title: "Change Password", message: "Enter new password", preferredStyle: .alert)
+                    
+                    newPasswordAlert.addTextField { (textField) in
+                        textField.text = ""
+                        textField.isSecureTextEntry = true
+                    }
+                    
+                    newPasswordAlert.addAction(UIAlertAction(title: "Submit", style: .default, handler: { (action) in
+                        let newPass = newPasswordAlert.textFields![0].text!
+                        
+                        Auth.auth().currentUser?.updatePassword(to: newPass) { error in
+                            if error == nil {
+                                let passwordChangedAlert = UIAlertController(
+                                  title: "Password changed.",
+                                  message: "",
+                                  preferredStyle: .alert)
+
+                                passwordChangedAlert.addAction(UIAlertAction(title:"OK",style:.default))
+                                self.present(passwordChangedAlert, animated: true, completion: nil)
+                            }
+                        }
+                    }))
+                    
+                    newPasswordAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+
+                    self.present(newPasswordAlert, animated: true, completion: nil)
+                }
+            }
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+
+        self.present(alert, animated: true, completion: nil)
+    }
     
     @IBAction func logoutPressed(_ sender: Any) {
         do {

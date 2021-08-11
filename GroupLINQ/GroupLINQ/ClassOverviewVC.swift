@@ -8,16 +8,17 @@
 import UIKit
 import FirebaseFirestore
 
-public let data = ["Tiago", "Anisha", "Erika", "Bulko"]
-
 let memberCellIdentifier = "MemberCell"
 
 class ClassOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
     @IBOutlet weak var classNameLabel: UILabel!
+    @IBOutlet weak var studentsLabel: UILabel!
     @IBOutlet weak var codeLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var groupSizeField: UITextField!
     
+    var data: [String] = []
     let db = Firestore.firestore()
     var className = ""
     var delegate: UIViewController!
@@ -44,11 +45,37 @@ class ClassOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 self.code = documentData?["code"] as? String
                 
                 self.codeLabel.text = self.code
+                
+                if let students = self.students {
+                    if students.count == 0 {
+                        self.studentsLabel.text = "No students signed up for your class yet"
+                        return
+                    }
+                    for studentId in students {
+                        self.db.collection("users").document(studentId).getDocument {
+                            (document, error) in
+                            if error == nil {
+                                self.data.append(document!.data()!["name"] as! String)
+                                self.tableView.reloadData()
+                            }
+                        }
+                    }
+                }
             } else {
                 print("Document does not exist")
             }
         }
 
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let userDefaults = UserDefaults.standard
+        if userDefaults.bool(forKey: "darkModeEnabled") {
+            overrideUserInterfaceStyle = .dark
+        }
+        else {
+            overrideUserInterfaceStyle = .light
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

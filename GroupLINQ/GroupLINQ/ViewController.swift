@@ -21,6 +21,10 @@ class ViewController: UIViewController {
         super.viewDidLoad()
     }
 
+    @IBAction func unwindToFirstViewController(_ sender: UIStoryboardSegue) {
+        // No code needed, no need to connect the IBAction explicitly
+    }
+    
     @IBAction func loginPressed(_ sender: Any) {
         print("here")
         guard let email = emailTextField.text,
@@ -28,7 +32,14 @@ class ViewController: UIViewController {
               email.count > 0,
               password.count > 0
         else {
-          return
+            let alert = UIAlertController(
+                title: "Sign in failed",
+                message: "One or more fields were left blank",
+                preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title:"OK",style:.default))
+            self.present(alert, animated: true, completion: nil)
+            return
         }
         
         Auth.auth().signIn(withEmail: email, password: password) {
