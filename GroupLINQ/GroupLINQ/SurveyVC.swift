@@ -15,6 +15,11 @@ class SurveyVC: UIViewController {
     @IBOutlet weak var calendarWeekView: JZLongPressWeekView!
     let viewModel = AllDayViewModel()
     let db = Firestore.firestore()
+    
+    var name: String!
+    var email: String!
+    var phone: String!
+    var password: String!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,16 +49,29 @@ class SurveyVC: UIViewController {
         for event in viewModel.events {
             timestamps.append(Timestamp(date: event.startDate))
         }
-        self.db.collection("users").document(Auth.auth().currentUser!.uid).updateData([
-            "availableTimes": timestamps
-        ])
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let mainTabBarController = storyboard.instantiateViewController(identifier: "MainTabBarController")
+        Auth.auth().createUser(withEmail: self.email, password: self.password, completion: { user, error in
+            let currentUser = Auth.auth().currentUser
+            if let currentUser = currentUser {
+                let uid = currentUser.uid
+                self.db.collection("users").document(uid).setData([
+                    "name": self.name!,
+                    "email": self.email!,
+                    "phoneNumber": self.phone!,
+                    "availableTimes": timestamps
+                ]) { err in
+                    if let err = err {
+                        print("Error adding document: \(err)")
+                    } else {
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        let mainTabBarController = storyboard.instantiateViewController(identifier: "MainTabBarController")
 
-        // This is to get the SceneDelegate object from your view controller
-        // then call the change root view controller function to change to main tab bar
-        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
+                        // This is to get the SceneDelegate object from your view controller
+                        // then call the change root view controller function to change to main tab bar
+                        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
+                    }
+                }
+            }
+        })
     }
     
     private func setupCalendarView() {

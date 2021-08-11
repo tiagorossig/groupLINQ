@@ -44,24 +44,7 @@ class SignUpVC: UIViewController {
             self.present(alert, animated: true, completion: nil)
             return
         }
-        Auth.auth().createUser(withEmail: email, password: password, completion: { user, error in
-            let currentUser = Auth.auth().currentUser
-            if let currentUser = currentUser {
-                let uid = currentUser.uid
-                self.db.collection("users").document(uid).setData([
-                    "name": self.nameTextField.text!,
-                    "email": email,
-                    "phoneNumber": self.phoneNumberTextField.text!,
-                    "availableTimes": []
-                ]) { err in
-                    if let err = err {
-                        print("Error adding document: \(err)")
-                    } else {
-                        self.performSegue(withIdentifier: "surveySegue", sender: self)
-                    }
-                }
-            }
-        })
+        self.performSegue(withIdentifier: "surveySegue", sender: self)
     }
     
     func textFieldShouldReturn(textField:UITextField) -> Bool {
@@ -71,5 +54,15 @@ class SignUpVC: UIViewController {
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "surveySegue",
+            let nextVC = segue.destination as? SurveyVC {
+            nextVC.name = nameTextField.text!
+            nextVC.phone = phoneNumberTextField.text!
+            nextVC.email = emailTextField.text!
+            nextVC.password = passwordTextField.text!
+        }
     }
 }
