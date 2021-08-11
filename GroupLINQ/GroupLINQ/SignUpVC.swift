@@ -17,6 +17,11 @@ class SignUpVC: UIViewController {
     let db = Firestore.firestore()
     
     override func viewDidLoad() {
+        // setting dark mode off here since the logo is black
+        UserDefaults.standard.set(false, forKey: "darkModeEnabled")
+        NotificationCenter.default.post(name: .darkModeDisabled, object: nil)
+        overrideUserInterfaceStyle = .light
+        
         super.viewDidLoad()
     }
     
@@ -52,5 +57,13 @@ class SignUpVC: UIViewController {
             }
         })
     }
+    
+    func textFieldShouldReturn(textField:UITextField) -> Bool {
+            textField.resignFirstResponder()
+            return true
+        }
 
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 }

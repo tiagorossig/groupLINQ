@@ -13,8 +13,12 @@ class ViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     
     override func viewDidLoad() {
+        // setting dark mode off here since the logo is black
+        UserDefaults.standard.set(false, forKey: "darkModeEnabled")
+        NotificationCenter.default.post(name: .darkModeDisabled, object: nil)
+        overrideUserInterfaceStyle = .light
+        
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
 
     @IBAction func loginPressed(_ sender: Any) {
@@ -27,7 +31,6 @@ class ViewController: UIViewController {
           return
         }
         
-////        COMMENTING OUT AUTH FOR FASTER TESTING
         Auth.auth().signIn(withEmail: email, password: password) {
             user, error in
             if let error = error, user == nil {
@@ -50,4 +53,12 @@ class ViewController: UIViewController {
         }
     }
     
+    func textFieldShouldReturn(textField:UITextField) -> Bool {
+            textField.resignFirstResponder()
+            return true
+        }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 }

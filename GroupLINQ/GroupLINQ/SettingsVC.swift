@@ -8,12 +8,14 @@
 import UIKit
 import Firebase
 import AVFoundation
+import FirebaseStorage
 
 class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var darkModeSwitch: UISwitch!
     @IBOutlet weak var imageView: UIImageView!
     
+    let storage = Storage.storage().reference()
     let picker = UIImagePickerController()
     
     override func viewDidLoad() {
@@ -22,9 +24,34 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         // dark mode
         NotificationCenter.default.addObserver(self, selector: #selector(darkModeEnabled(_:)), name: .darkModeEnabled, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(darkModeDisabled(_:)), name: .darkModeDisabled, object: nil)
+        overrideUserInterfaceStyle = darkModeSwitch.isOn ? .dark : .light
         
         // picture
+//        imageView.layer.borderWidth = 1.0
+        imageView.layer.masksToBounds = false
+        imageView.layer.borderColor = UIColor.white.cgColor
+        imageView.layer.cornerRadius = 25
+        imageView.clipsToBounds = true
+        imageView.contentMode = .scaleAspectFit
+        
         picker.delegate = self
+        guard let urlString = UserDefaults.standard.value(forKey: "image/\(Auth.auth().currentUser!.uid)") as? String,
+              let url = URL(string: urlString) else {
+                    return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url, completionHandler: { data, _, error in
+            guard let data = data, error ==  nil else {
+                return
+            }
+            
+            DispatchQueue.main.async {
+                let image = UIImage(data: data)
+                self.imageView.image = image
+            }
+        })
+        
+        task.resume()
     }
     
     
@@ -80,12 +107,37 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     //    PICTURE   \\
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
-        let chosenImage = info[.originalImage] as! UIImage
-        
-        imageView.contentMode = .scaleAspectFit
-        imageView.image = chosenImage
         dismiss(animated: true, completion: nil)
+        guard let chosenImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else {
+            return
+        }
+        imageView.image = chosenImage
+        
+        guard let imageData = chosenImage.pngData() else {
+            return
+        }
+        
+        storage.child("images/\(Auth.auth().currentUser!.uid)").putData(imageData, metadata: nil, completion: {_, error in
+            guard error == nil else {
+                print("Failed to upload")
+                return
+            }
+            
+            self.storage.child("images/\(Auth.auth().currentUser!.uid)").downloadURL(completion: { url, error in
+                guard let url = url, error == nil else {
+                    return
+                }
+                
+                let urlString = url.absoluteString
+                
+                DispatchQueue.main.async {
+                    self.imageView.image = chosenImage
+                }
+                
+                print("Download URL: \(urlString)")
+                UserDefaults.standard.setValue(urlString, forKey: "image/\(Auth.auth().currentUser!.uid)")
+            })
+        })
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -125,7 +177,7 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     }
     
     func librarySelected(_ sender: Any) {
-        picker.allowsEditing = false
+        picker.allowsEditing = true
         picker.sourceType = .photoLibrary
         
         present(picker, animated: true, completion: nil)

@@ -28,6 +28,8 @@ class ClassOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        overrideUserInterfaceStyle = .light // temp
+        
         classNameLabel.text = className
         tableView.delegate = self
         tableView.dataSource = self
