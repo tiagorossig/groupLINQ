@@ -99,30 +99,39 @@ class ClassOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-//    @IBAction func makeGroupPressed(_ sender: Any) {
-//        print("makeGroup pressed")
-//
+    @IBAction func makeGroupPressed(_ sender: Any) {
+        print("makeGroup pressed")
+
 //        let leftOver = students?.count ?? 0 % Int(groupSizeField.text)
-//
-//        let numGroups = Int(groupSizeField.text)
-//
-//        for i in 0...numGroups {
-//            self.db.collection("groups").document(getTimeEpoch()).setData([
-//                "class": code,
-//                "times": self.generateClassCode(length: 6),
-//                "members": "" // TODO: initialize with current user's name
-//            ]) { err in
-//                if let err = err {
-//                    print("Error adding document: \(err)")
-//                } else {
-//                    self.performSegue(withIdentifier: "createClassSegue", sender: self)
-//                }
-//            }
-//        }
+        let numGroups = Int(groupSizeField.text!) ?? 1
+        let numStudentsPerGroup = (students?.count ?? 0) / numGroups
+
+        for _ in 0...numGroups {
+            var members = [String]()
+            for j in 0...numStudentsPerGroup {
+                members.append(students?[j] ?? "none")
+            }
+            self.db.collection("groups").addDocument(data: [
+                "class": code ?? "none",
+                "times": [String](),
+                "members": members // TODO: initialize with current user's name
+            ]) { err in
+                if let err = err {
+                    print("Error adding document: \(err)")
+                } else {
+                    self.performSegue(withIdentifier: "createClassSegue", sender: self)
+                }
+            }
+        }
         
+    }
+    
+//    func textFieldShouldReturn(textField: UITextField) -> Bool {
+//        textField.resignFirstResponder()
+//        return true
 //    }
 //
-//    const getTimeEpoch = () => {
-//        return new Date().getTime().toString();
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        self.view.endEditing(true)
 //    }
 }
