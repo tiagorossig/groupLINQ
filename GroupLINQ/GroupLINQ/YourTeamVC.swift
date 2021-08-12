@@ -33,7 +33,6 @@ class YourTeamVC: UIViewController, UITableViewDelegate, UITableViewDataSource  
                                     let name = document.get("name") as! String
                                     teammates.append(name)
                                     let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                                    print("Document data: \(dataDescription)")
                                     self.tableView.reloadData()
                                 } else {
                                     print("Document does not exist")
