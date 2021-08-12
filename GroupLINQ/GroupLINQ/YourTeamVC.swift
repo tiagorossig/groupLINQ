@@ -18,17 +18,30 @@ class YourTeamVC: UIViewController, UITableViewDelegate, UITableViewDataSource  
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        
         self.db.collection("groups").whereField("members", arrayContains: Auth.auth().currentUser?.uid)
             .getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else {
                     for document in querySnapshot!.documents {
-                        teammates.append(document.documentID)
+                        for member in document["members"] as? Array ?? [""] {
+                            let docRef = self.db.collection("users").document(member)
+                            docRef.getDocument {(document, error) in
+                                if let document = document, document.exists {
+                                    let name = document.get("name") as! String
+                                    teammates.append(name)
+                                    let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                                    print("Document data: \(dataDescription)")
+                                    self.tableView.reloadData()
+                                } else {
+                                    print("Document does not exist")
+                                }
+                            }
+                        }
                     }
-                    self.tableView.reloadData()
                 }
-        }
+            }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
