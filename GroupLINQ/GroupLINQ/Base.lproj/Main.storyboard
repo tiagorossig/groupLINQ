@@ -761,7 +761,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="ZGm-eZ-32W" kind="show" id="KUp-bc-Gbu"/>
+                                            <segue destination="ZGm-eZ-32W" kind="show" identifier="memberSegue" id="KUp-bc-Gbu"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

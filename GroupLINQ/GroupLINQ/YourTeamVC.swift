@@ -13,6 +13,7 @@ class YourTeamVC: UIViewController, UITableViewDelegate, UITableViewDataSource  
     let db = Firestore.firestore()
     @IBOutlet weak var tableView: UITableView!
     let tcID = "teamMemberCell"
+    let segID = "memberSegue"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +63,14 @@ class YourTeamVC: UIViewController, UITableViewDelegate, UITableViewDataSource  
         }
         else {
             overrideUserInterfaceStyle = .light
+        }
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == segID,
+            let destination = segue.destination as? MemberScheduleVC,
+            let memberIdx = tableView.indexPathForSelectedRow?.row {
+            destination.delegate = self
+            destination.mName = teammates[memberIdx]
         }
     }
 }
