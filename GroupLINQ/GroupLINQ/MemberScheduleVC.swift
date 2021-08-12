@@ -21,7 +21,7 @@ class MemberScheduleVC: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         memberName.text = "Member Name: \(mName ?? "")"
         self.db.collection("users").whereField("name", isEqualTo: mName)
         .getDocuments() { (querySnapshot, err) in
@@ -34,7 +34,9 @@ class MemberScheduleVC: UIViewController {
                 }
             }
         }
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         let userDefaults = UserDefaults.standard
         if userDefaults.bool(forKey: "darkModeEnabled") {
             overrideUserInterfaceStyle = .dark

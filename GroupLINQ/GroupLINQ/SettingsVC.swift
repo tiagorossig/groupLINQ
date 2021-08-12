@@ -11,7 +11,7 @@ import AVFoundation
 import FirebaseStorage
 
 class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
+    let db = Firestore.firestore()
     @IBOutlet weak var darkModeSwitch: UISwitch!
     @IBOutlet weak var imageView: UIImageView!
     let userDefaults = UserDefaults.standard
@@ -152,6 +152,11 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         self.present(alert, animated: true, completion: nil)
     }
     
+    @IBAction func viewProfilePressed(_ sender: Any) {
+        performSegue(withIdentifier: "viewProfileSegue", sender: Any?.self)
+    }
+    
+    
     @IBAction func logoutPressed(_ sender: Any) {
         do {
             try Auth.auth().signOut()
@@ -289,6 +294,24 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
             alertVC.addAction(okAction)
             
             present(alertVC, animated: true, completion: nil)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "viewProfileSegue",
+           let destination = segue.destination as? MemberScheduleVC {
+            destination.delegate = self
+            print(Auth.auth().currentUser?.uid)
+            let docRef = self.db.collection("users").document(Auth.auth().currentUser?.uid ?? "")
+            docRef.getDocument {(document, error) in
+                if let document = document, document.exists {
+                    let name = document.get("name") as! String
+                    destination.mName = name
+                    print(name)
+                } else {
+                    print("Document does not exist")
+                }
+            }
         }
     }
 }
