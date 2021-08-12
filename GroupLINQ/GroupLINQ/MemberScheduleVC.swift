@@ -8,7 +8,10 @@
 import UIKit
 
 class MemberScheduleVC: UIViewController {
-
+    @IBOutlet weak var memberName: UILabel!
+    @IBOutlet weak var email: UILabel!
+    @IBOutlet weak var phoneNumber: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
