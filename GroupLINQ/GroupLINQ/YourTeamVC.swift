@@ -13,22 +13,35 @@ class YourTeamVC: UIViewController, UITableViewDelegate, UITableViewDataSource  
     let db = Firestore.firestore()
     @IBOutlet weak var tableView: UITableView!
     let tcID = "teamMemberCell"
+    let segID = "memberSegue"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        
         self.db.collection("groups").whereField("members", arrayContains: Auth.auth().currentUser?.uid)
             .getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else {
                     for document in querySnapshot!.documents {
-                        teammates.append(document.documentID)
+                        for member in document["members"] as? Array ?? [""] {
+                            let docRef = self.db.collection("users").document(member)
+                            docRef.getDocument {(document, error) in
+                                if let document = document, document.exists {
+                                    let name = document.get("name") as! String
+                                    teammates.append(name)
+                                    let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                                    self.tableView.reloadData()
+                                } else {
+                                    print("Document does not exist")
+                                }
+                            }
+                        }
                     }
-                    self.tableView.reloadData()
                 }
-        }
+            }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -49,6 +62,14 @@ class YourTeamVC: UIViewController, UITableViewDelegate, UITableViewDataSource  
         }
         else {
             overrideUserInterfaceStyle = .light
+        }
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == segID,
+            let destination = segue.destination as? MemberScheduleVC,
+            let memberIdx = tableView.indexPathForSelectedRow?.row {
+            destination.delegate = self
+            destination.mName = teammates[memberIdx]
         }
     }
 }

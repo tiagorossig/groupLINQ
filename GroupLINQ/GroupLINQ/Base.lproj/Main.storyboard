@@ -636,6 +636,29 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wd4-np-nSN">
+                                <rect key="frame" x="59" y="523" width="311" height="65"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RSk-tu-mG6">
+                                        <rect key="frame" x="8" y="0.0" width="270" height="65"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <state key="normal" title="View Profile">
+                                            <color key="titleColor" systemColor="labelColor"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="viewProfilePressed:" destination="CDV-ds-MyY" eventType="touchUpInside" id="ytV-PG-1nU"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="dCJ-cH-HAa"/>
                         <color key="backgroundColor" red="0.8901960784313725" green="0.93333333333333335" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -644,6 +667,7 @@
                     <connections>
                         <outlet property="darkModeSwitch" destination="zj5-Jc-meh" id="Uz8-ez-lG6"/>
                         <outlet property="imageView" destination="fW4-fh-P5N" id="myD-o0-CvW"/>
+                        <segue destination="ZGm-eZ-32W" kind="show" identifier="viewProfileSegue" id="oQb-7z-Nph"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qCs-QA-Fwy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -724,8 +748,23 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Possible Meeting Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v12-xt-eRd">
+                                <rect key="frame" x="98" y="647" width="233" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jam-mB-Z2P">
+                                <rect key="frame" x="26" y="699" width="275" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cHe-Fe-C7q">
-                                <rect key="frame" x="26" y="180" width="377" height="420"/>
+                                <rect key="frame" x="17" y="180" width="377" height="420"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
@@ -746,26 +785,11 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="ZGm-eZ-32W" kind="show" id="KUp-bc-Gbu"/>
+                                            <segue destination="ZGm-eZ-32W" kind="show" identifier="memberSegue" id="KUp-bc-Gbu"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Possible Meeting Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v12-xt-eRd">
-                                <rect key="frame" x="98" y="647" width="233" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jam-mB-Z2P">
-                                <rect key="frame" x="26" y="699" width="275" height="27"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="TBv-TN-iOQ"/>
                         <color key="backgroundColor" red="0.89019607840000003" green="0.93333333330000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -836,12 +860,20 @@
                         <color key="backgroundColor" red="0.89019607840000003" green="0.93333333330000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="tcl-KQ-25K"/>
+                    <connections>
+                        <outlet property="email" destination="HUB-mE-yev" id="J5f-GJ-InA"/>
+                        <outlet property="memberName" destination="KSq-f4-BzO" id="gDf-rV-cze"/>
+                        <outlet property="phoneNumber" destination="cxg-TV-CYm" id="X8i-oq-XXL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XVs-X6-hkM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5395.794392523364" y="123.75809935205184"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="oQb-7z-Nph"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="Logo" width="2236" height="1040"/>
         <image name="gearshape" catalog="system" width="128" height="121"/>

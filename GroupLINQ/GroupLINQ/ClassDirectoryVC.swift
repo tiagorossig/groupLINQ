@@ -73,6 +73,7 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         let cell =  tableView.dequeueReusableCell(withIdentifier: tcID, for: indexPath as IndexPath)
         let row = indexPath.row
         cell.textLabel?.text = "Class \(row): \(classList[row])\n\(statusList[row])"
+        //self.tableView.reloadData()
         return cell
     }
     
