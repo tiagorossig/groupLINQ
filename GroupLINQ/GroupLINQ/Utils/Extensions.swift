@@ -14,6 +14,14 @@ extension Notification.Name {
     static let darkModeDisabled = Notification.Name("darkModeDisabled")
 }
 
+extension Array {
+    func chunked(into size: Int) -> [[Element]] {
+        return stride(from: 0, to: count, by: size).map {
+            Array(self[$0 ..< Swift.min($0 + size, count)])
+        }
+    }
+}
+
 extension Date {
 
     func add(component: Calendar.Component, value: Int) -> Date {

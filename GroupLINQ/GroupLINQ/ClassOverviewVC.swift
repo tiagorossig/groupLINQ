@@ -10,13 +10,12 @@ import FirebaseFirestore
 
 let memberCellIdentifier = "MemberCell"
 
-class ClassOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+class ClassOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
     @IBOutlet weak var classNameLabel: UILabel!
     @IBOutlet weak var studentsLabel: UILabel!
     @IBOutlet weak var codeLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var groupSizeField: UITextField!
+    @IBOutlet weak var groupSizePicker: UIPickerView!
     
     var data: [String] = []
     let db = Firestore.firestore()
@@ -26,6 +25,8 @@ class ClassOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     var students: [String]?
     var code: String?
     var users: [String: [Date]] = [:]
+    var timesDict: [Date: [String]] = [:]
+    var pickerData: [Int] = [Int]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +35,8 @@ class ClassOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         classNameLabel.text = className
         tableView.delegate = self
         tableView.dataSource = self
+        groupSizePicker.delegate = self
+        groupSizePicker.dataSource = self
         
         // get classes
         let docRef = db.collection("classes").document(className)
@@ -51,12 +54,38 @@ class ClassOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                         self.studentsLabel.text = "No students signed up for your class yet"
                         return
                     }
+                    
+                    // only allow group sizes < # students to be formed
+                    self.pickerData = Array(1...students.count)
+                    self.groupSizePicker.reloadAllComponents()
+                    
                     for studentId in students {
                         self.db.collection("users").document(studentId).getDocument {
                             (document, error) in
                             if error == nil {
                                 self.data.append(document!.data()!["name"] as! String)
                                 self.tableView.reloadData()
+                            }
+                        }
+                    }
+                    
+                    // get student times for grouping algorithm
+                    for studentId in students {
+                        self.db.collection("users").document(studentId).getDocument {
+                            (document, error) in
+                            if error == nil {
+                                let studentTimes = (document!.data()!["availableTimes"] as! [Timestamp])
+                                for t in studentTimes {
+                                    let date = t.dateValue()
+                                    if self.timesDict[date] == nil {
+                                        self.timesDict[date] = [studentId]
+                                    }
+                                    else {
+                                        var studentsForThisTime = self.timesDict[date]
+                                        studentsForThisTime?.append(studentId)
+                                        self.timesDict[date] = studentsForThisTime
+                                    }
+                                }
                             }
                         }
                     }
@@ -104,6 +133,26 @@ class ClassOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         overrideUserInterfaceStyle = userDefaults.bool(forKey: "darkModeEnabled") ? .dark : .light
     }
     
+    override func didReceiveMemoryWarning() {
+            super.didReceiveMemoryWarning()
+            // Dispose of any resources that can be recreated.
+        }
+
+    // Number of columns of data
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    // The number of rows of data
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerData.count
+    }
+    
+    // The data to return fopr the row and component (column) that's being passed in
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return String(pickerData[row])
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data.count
     }
@@ -124,65 +173,90 @@ class ClassOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     @IBAction func makeGroupPressed(_ sender: Any) {
-        print("makeGroup pressed")
-        
-        let groupSize = Int(groupSizeField.text!) ?? 1
-        let numStudents = students?.count ?? 0
-        let numGroups = numStudents / groupSize
-        var frequenciesDict: [Date: Int] = [:]
-        
-        for (_, userTimes) in users {
-            for time in userTimes {
-                if frequenciesDict[time] == nil {
-                    frequenciesDict[time] = 1
-                } else {
-                    frequenciesDict[time]! += 1
+        // no students in class
+        if students == nil || students?.count == 0 {
+            let alert = UIAlertController(title: "Cannot make groups", message: "Wait for students to join your class to make groups.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+        // class is closed
+        self.db.collection("classes").document(className).getDocument {
+            (document, error) in
+            if error == nil {
+                let open = (document!.data()!["open"] as! Bool)
+                if !open {
+                    let alert = UIAlertController(title: "Cannot make groups", message: "The class is now closed and groups have already been made.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                    return
+                }
+                else {
+                    self.makeGroups()
                 }
             }
         }
-        
-//        for (date, freq) in frequenciesDict {
-//            if freq >= groupSize {
-//                self.db.collection("groups").addDocument(data: [
-//                    "class": code ?? "none",
-//                    "times": [String](),
-//                    "members": members // TODO: initialize with current user's name
-//                ]) { err in
-//                    if let err = err {
-//                        print("Error adding document: \(err)")
-//                    } else {
-//                        self.performSegue(withIdentifier: "createClassSegue", sender: self)
-//                    }
-//                }
-//            }
-//        }
-        
-        for _ in 0...numGroups {
-            var members = [String]()
-            for j in 0...groupSize {
-                members.append(students?[j] ?? "none")
-            }
-            self.db.collection("groups").addDocument(data: [
-                "class": className ?? "none",
-                "times": [String](),
-                "members": members // TODO: initialize with current user's name
-            ]) { err in
-                if let err = err {
-                    print("Error adding document: \(err)")
-                } else {
-                    self.performSegue(withIdentifier: "createClassSegue", sender: self)
-                }
-            }
-        }
-        
     }
     
-//    func textFieldShouldReturn(textField: UITextField) -> Bool {
-//        textField.resignFirstResponder()
-//        return true
-//    }
-//
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        self.view.endEditing(true)
-//    }
+    func makeGroups() {
+        let groupSize = Int(pickerData[groupSizePicker.selectedRow(inComponent: 0)]) ?? 1
+        let numStudents = students?.count ?? 0
+
+        var groupedStudents: [String] = []
+        for (time, studentsFreeAtThisTime) in timesDict {
+            let ungroupedStudentsFreeAtThisTime =  studentsFreeAtThisTime.filter { !groupedStudents.contains($0) }
+            if ungroupedStudentsFreeAtThisTime.count >= groupSize {
+                var groupMembers: [String] = []
+                for i in 0..<groupSize {
+                    groupMembers.append(ungroupedStudentsFreeAtThisTime[i])
+                    groupedStudents.append(ungroupedStudentsFreeAtThisTime[i])
+                }
+                self.db.collection("groups").addDocument(data: [
+                                "class": className ?? "none",
+                                "time": time,
+                                "members": groupMembers
+                            ]) { err in
+                                if let err = err {
+                                    print("Error adding document: \(err)")
+                                } else {
+                                    print("group added with time \(time)")
+                                }
+                            }
+                }
+        }
+
+        // randomly group the leftover students who did not have compatible enough schedules
+        let leftoverStudents = (self.students ?? []).filter { !groupedStudents.contains($0) }
+        let chunkedLeftovers = leftoverStudents.chunked(into: groupSize)
+        for chunk in chunkedLeftovers {
+            self.db.collection("groups").addDocument(data: [
+                            "class": className ?? "none",
+                "time": NSNull(),
+                "members": chunk
+                        ]) { err in
+                            if let err = err {
+                                print("Error adding document: \(err)")
+                            } else {
+                                print("group added from leftovers")
+                            }
+                        }
+            }
+        
+        
+        // mark this class as closed
+        self.db.collection("classes").document(className).updateData([
+            "open": false
+        ])
+    
+        let groupsMadeAlert = UIAlertController(title: "Groups made", message: "All groups have been made and the class cannot be joined by more students.", preferredStyle: .alert)
+
+
+        groupsMadeAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+
+        self.present(groupsMadeAlert, animated: true, completion: nil)
+    }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 }
