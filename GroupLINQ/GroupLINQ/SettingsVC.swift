@@ -38,6 +38,7 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         picker.delegate = self
         guard let urlString = UserDefaults.standard.value(forKey: "image/\(Auth.auth().currentUser!.uid)") as? String,
               let url = URL(string: urlString) else {
+                self.imageView.image = UIImage(named: "default")
                     return
         }
         
