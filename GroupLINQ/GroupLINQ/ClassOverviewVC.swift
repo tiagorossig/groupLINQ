@@ -25,18 +25,18 @@ class ClassOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     var owner: String?
     var students: [String]?
     var code: String?
+    var users: [String: [Date]] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        overrideUserInterfaceStyle = .light // temp
-        
+        // set outlets
         classNameLabel.text = className
         tableView.delegate = self
         tableView.dataSource = self
         
+        // get classes
         let docRef = db.collection("classes").document(className)
-
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
                 let documentData = document.data()
@@ -65,17 +65,43 @@ class ClassOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 print("Document does not exist")
             }
         }
-
+        
+        // get users
+        let collectionRef = db.collection("users")
+        collectionRef.getDocuments(completion: { snapshot, error in
+            if let err = error {
+                print(err.localizedDescription)
+                return
+            }
+            
+            guard let docs = snapshot?.documents else {
+                return
+            }
+            
+            for doc in docs {
+                let documentData = doc.data()
+                let documentID = doc.documentID
+                
+                guard let stamps = documentData["availableTimes"] as? [Timestamp] else {
+                    return
+                }
+                
+                for stamp in stamps {
+                    let date = stamp.dateValue()
+                    
+                    if self.users[documentID] == nil {
+                        self.users[documentID] = []
+                    }
+                    self.users[documentID]?.append(date)
+                }
+                
+            }
+        })
     }
     
     override func viewWillAppear(_ animated: Bool) {
         let userDefaults = UserDefaults.standard
-        if userDefaults.bool(forKey: "darkModeEnabled") {
-            overrideUserInterfaceStyle = .dark
-        }
-        else {
-            overrideUserInterfaceStyle = .light
-        }
+        overrideUserInterfaceStyle = userDefaults.bool(forKey: "darkModeEnabled") ? .dark : .light
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -84,14 +110,12 @@ class ClassOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: memberCellIdentifier, for: indexPath as IndexPath)
-        
         cell.textLabel?.text = data[indexPath.row]
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        
         return indexPath
     }
     
@@ -101,14 +125,41 @@ class ClassOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     @IBAction func makeGroupPressed(_ sender: Any) {
         print("makeGroup pressed")
-
-//        let leftOver = students?.count ?? 0 % Int(groupSizeField.text)
-        let numGroups = Int(groupSizeField.text!) ?? 1
-        let numStudentsPerGroup = (students?.count ?? 0) / numGroups
-
+        
+        let groupSize = Int(groupSizeField.text!) ?? 1
+        let numStudents = students?.count ?? 0
+        let numGroups = numStudents / groupSize
+        var frequenciesDict: [Date: Int] = [:]
+        
+        for (_, userTimes) in users {
+            for time in userTimes {
+                if frequenciesDict[time] == nil {
+                    frequenciesDict[time] = 1
+                } else {
+                    frequenciesDict[time]! += 1
+                }
+            }
+        }
+        
+//        for (date, freq) in frequenciesDict {
+//            if freq >= groupSize {
+//                self.db.collection("groups").addDocument(data: [
+//                    "class": code ?? "none",
+//                    "times": [String](),
+//                    "members": members // TODO: initialize with current user's name
+//                ]) { err in
+//                    if let err = err {
+//                        print("Error adding document: \(err)")
+//                    } else {
+//                        self.performSegue(withIdentifier: "createClassSegue", sender: self)
+//                    }
+//                }
+//            }
+//        }
+        
         for _ in 0...numGroups {
             var members = [String]()
-            for j in 0...numStudentsPerGroup {
+            for j in 0...groupSize {
                 members.append(students?[j] ?? "none")
             }
             self.db.collection("groups").addDocument(data: [
