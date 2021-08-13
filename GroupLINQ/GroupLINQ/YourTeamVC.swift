@@ -12,23 +12,28 @@ var teammates : [String] = []
 class YourTeamVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
     let db = Firestore.firestore()
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var suggestedTime: UILabel!
     let tcID = "teamMemberCell"
     let segID = "memberSegue"
+    var delegate : UIViewController!
+    var className : String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
         
-        // reset every time so the teammates don't appear more than noce
+        // reset every time so the teammates don't appear more than once
         teammates = []
         
-        self.db.collection("groups").whereField("members", arrayContains: Auth.auth().currentUser?.uid)
+        self.db.collection("groups").whereField("class", isEqualTo: className).whereField("members", arrayContains: Auth.auth().currentUser?.uid)
             .getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else {
                     for document in querySnapshot!.documents {
+                        let date = document.get("time") as! Timestamp
+                        self.suggestedTime.text = "\(date.dateValue())"
                         for member in document["members"] as? Array ?? [""] {
                             let docRef = self.db.collection("users").document(member)
                             docRef.getDocument {(document, error) in

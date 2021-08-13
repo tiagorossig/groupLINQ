@@ -201,6 +201,12 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
             let nextVC = segue.destination as? ClassOverviewVC {
             nextVC.delegate = self
             nextVC.className = self.className
-        }
+        } else if segue.identifier == "teamResultsSegue",
+                 let nextVC = segue.destination as? YourTeamVC,
+                 let classIdx = tableView.indexPathForSelectedRow?.row
+                 {
+           nextVC.delegate = self
+           nextVC.className = classList[classIdx]
+       }
     }
 }
