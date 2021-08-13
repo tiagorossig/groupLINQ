@@ -183,6 +183,9 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                         self.db.collection("classes").document(id).updateData([
                             "students": FieldValue.arrayUnion([Auth.auth().currentUser?.uid])
                         ])
+                        classList.append(id)
+                        statusList.append("Member")
+                        self.tableView.reloadData()
                         self.performSegue(withIdentifier: "waitingSegue", sender: self)
                     }
             }
