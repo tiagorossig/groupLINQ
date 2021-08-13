@@ -111,7 +111,7 @@ class SurveyVC: UIViewController {
 }
 
 extension SurveyVC: JZBaseViewDelegate {
-    func initDateDidChange(_ weekView: JZBaseWeekView, initDate: Date) {
+    func initDateDidChange(_ weekView: JZBaseWeekView, initDate: Date) { 
         updateNaviBarTitle()
     }
 }

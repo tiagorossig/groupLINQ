@@ -93,8 +93,10 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                                     print("Error getting documents: \(err)")
                                 } else {
                                     if querySnapshot!.isEmpty {
+                                        print("empty")
                                         self.performSegue(withIdentifier: "waitingSegue", sender: self)
                                     }else{
+                                        print("grouped")
                                         self.performSegue(withIdentifier: "teamResultsSegue", sender: self)
                                     }
                                 }
