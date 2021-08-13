@@ -139,6 +139,7 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                     } else {
                         self.db.collection("classes").document(self.className).setData([
                             "students": [],
+                            "open": true,
                             "code": self.generateClassCode(length: 6),
                             "owner": Auth.auth().currentUser?.uid
                         ]) { err in
