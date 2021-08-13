@@ -33,6 +33,7 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         }
         
         getClasses()
+        tableView.reloadData()
     }
     
     func getClasses() {
@@ -47,7 +48,9 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                     for document in querySnapshot!.documents {
                         classList.append(document.documentID)
                         statusList.append("Member")
+                        self.tableView.reloadData()
                     }
+                    
                     
                     self.db.collection("classes").whereField("owner", isEqualTo: Auth.auth().currentUser?.uid)
                         .getDocuments() { (querySnapshot, err) in
@@ -57,6 +60,7 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                                 for document in querySnapshot!.documents {
                                     classList.append(document.documentID)
                                     statusList.append("Owner")
+                                    self.tableView.reloadData()
                                 }
                                 self.tableView.reloadData()
                             }
@@ -73,7 +77,6 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         let cell =  tableView.dequeueReusableCell(withIdentifier: tcID, for: indexPath as IndexPath)
         let row = indexPath.row
         cell.textLabel?.text = "Class \(row): \(classList[row])\n\(statusList[row])"
-        //self.tableView.reloadData()
         return cell
     }
     
@@ -93,10 +96,8 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                                     print("Error getting documents: \(err)")
                                 } else {
                                     if querySnapshot!.isEmpty {
-                                        print("empty")
                                         self.performSegue(withIdentifier: "waitingSegue", sender: self)
                                     }else{
-                                        print("grouped")
                                         self.performSegue(withIdentifier: "teamResultsSegue", sender: self)
                                     }
                                 }

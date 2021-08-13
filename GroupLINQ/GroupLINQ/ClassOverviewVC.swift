@@ -163,7 +163,7 @@ class ClassOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 members.append(students?[j] ?? "none")
             }
             self.db.collection("groups").addDocument(data: [
-                "class": code ?? "none",
+                "class": className ?? "none",
                 "times": [String](),
                 "members": members // TODO: initialize with current user's name
             ]) { err in
