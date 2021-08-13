@@ -24,12 +24,6 @@ class MemberScheduleVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupBasic()
-        setupCalendarView()
-        setupNaviBar()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
         memberName.text = "Member Name: \(mName ?? "")"
         self.db.collection("users").whereField("name", isEqualTo: mName)
         .getDocuments() { (querySnapshot, err) in
@@ -39,9 +33,20 @@ class MemberScheduleVC: UIViewController {
                 for document in querySnapshot!.documents {
                     self.email.text = "Email: \(document.get("email") as! String)"
                     self.phoneNumber.text = "Phone Number: \(document.get("phoneNumber") as! String)"
+                    if let availableTimes = document["availableTimes"] as? [Timestamp] {
+                        for t in availableTimes {
+                            let date = t.dateValue()
+                            self.viewModel.events.append(AllDayEvent(id: UUID().uuidString, title: "", startDate: date, endDate: date.add(component: .hour, value: 1),
+                                                                     location: "", isAllDay: false))
+                        }
+                        self.setupCalendarView()
+                    }
                 }
             }
         }
+        self.setupBasic()
+        self.setupCalendarView()
+        self.setupNaviBar()
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -67,7 +72,7 @@ class MemberScheduleVC: UIViewController {
         } else {
             calendarWeekView.setupCalendar(numOfDays: 7,
                                            setDate: Date(timeIntervalSinceReferenceDate: 0),
-                                           allEvents: viewModel.eventsByDate,
+                                           allEvents: JZWeekViewHelper.getIntraEventsByDate(originalEvents: self.viewModel.events),
                                            scrollType: .pageScroll,
                                            scrollableRange: (Date(timeIntervalSinceReferenceDate: 0), Date(timeIntervalSinceReferenceDate: 60 * 60 * 24 * 3)))
         }
@@ -104,33 +109,15 @@ extension MemberScheduleVC: JZBaseViewDelegate {
 extension MemberScheduleVC: JZLongPressViewDelegate, JZLongPressViewDataSource {
 
     func weekView(_ weekView: JZLongPressWeekView, didEndAddNewLongPressAt startDate: Date) {
-        let newEvent = AllDayEvent(id: UUID().uuidString, title: "", startDate: startDate, endDate: startDate.add(component: .hour, value: weekView.addNewDurationMins/60),
-                             location: "", isAllDay: false)
-
-        if viewModel.eventsByDate[startDate.startOfDay] == nil {
-            viewModel.eventsByDate[startDate.startOfDay] = [AllDayEvent]()
-        }
-        viewModel.events.append(newEvent)
-        viewModel.eventsByDate = JZWeekViewHelper.getIntraEventsByDate(originalEvents: viewModel.events)
-        weekView.forceReload(reloadEvents: viewModel.eventsByDate)
+        // don't let them edit another person's calendar
     }
 
     func weekView(_ weekView: JZLongPressWeekView, editingEvent: JZBaseEvent, didEndMoveLongPressAt startDate: Date) {
-        guard let event = editingEvent as? AllDayEvent else { return }
-        let duration = Calendar.current.dateComponents([.minute], from: event.startDate, to: event.endDate).minute!
-        let selectedIndex = viewModel.events.firstIndex(where: { $0.id == event.id })!
-        viewModel.events[selectedIndex].startDate = startDate
-        viewModel.events[selectedIndex].endDate = startDate.add(component: .minute, value: duration)
-
-        viewModel.eventsByDate = JZWeekViewHelper.getIntraEventsByDate(originalEvents: viewModel.events)
-        weekView.forceReload(reloadEvents: viewModel.eventsByDate)
+        // don't let them edit another person's calendar
     }
 
     func weekView(_ weekView: JZLongPressWeekView, viewForAddNewLongPressAt startDate: Date) -> UIView {
-        if let view = UINib(nibName: EventCell.className, bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? EventCell {
-            view.titleLabel.text = ""
-            return view
-        }
+        // don't let them edit another person's calendar
         return UIView()
     }
 }
