@@ -302,11 +302,11 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         if segue.identifier == "viewProfileSegue",
            let destination = segue.destination as? MemberScheduleVC {
             destination.delegate = self
-            print(Auth.auth().currentUser?.uid)
             let docRef = self.db.collection("users").document(Auth.auth().currentUser?.uid ?? "")
             docRef.getDocument {(document, error) in
                 if let document = document, document.exists {
                     let name = document.get("name") as! String
+                    print("in prepare for segue")
                     destination.mName = name
                     print(name)
                 } else {

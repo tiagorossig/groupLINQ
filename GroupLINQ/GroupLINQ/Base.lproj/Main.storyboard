@@ -756,58 +756,60 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="g4M-e5-cVb">
-                                <rect key="frame" x="20" y="142" width="374" height="138"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="daw-5D-Edu">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="696"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Member Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KSq-f4-BzO">
-                                        <rect key="frame" x="0.0" y="0.0" width="135" height="24"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Member schedule " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0z4-Ko-hpg">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="122"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="34"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HUB-mE-yev">
-                                        <rect key="frame" x="0.0" y="38" width="52.333333333333336" height="24"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone number:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cxg-TV-CYm">
-                                        <rect key="frame" x="0.0" y="76" width="133.66666666666666" height="24"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Available Times:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sa3-Hl-riT">
-                                        <rect key="frame" x="0.0" y="114" width="140.66666666666666" height="24"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="g4M-e5-cVb">
+                                        <rect key="frame" x="0.0" y="132" width="414" height="138"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Member Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KSq-f4-BzO">
+                                                <rect key="frame" x="0.0" y="0.0" width="135" height="24"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HUB-mE-yev">
+                                                <rect key="frame" x="0.0" y="38" width="52.333333333333336" height="24"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone number:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cxg-TV-CYm">
+                                                <rect key="frame" x="0.0" y="76" width="133.66666666666666" height="24"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Available Times:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sa3-Hl-riT">
+                                                <rect key="frame" x="0.0" y="114" width="140.66666666666666" height="24"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k8b-FL-Gke" customClass="LongPressWeekView" customModule="GroupLINQ" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="280" width="414" height="416"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </view>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Member schedule " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0z4-Ko-hpg">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="122"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k8b-FL-Gke" customClass="LongPressWeekView" customModule="GroupLINQ" customModuleProvider="target">
-                                <rect key="frame" x="42" y="294" width="331" height="370"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="dyT-eD-1ZQ"/>
                         <color key="backgroundColor" red="0.89019607840000003" green="0.93333333330000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="dyT-eD-1ZQ" firstAttribute="trailing" secondItem="0z4-Ko-hpg" secondAttribute="trailing" id="Cux-Ry-7qC"/>
-                            <constraint firstItem="dyT-eD-1ZQ" firstAttribute="trailing" secondItem="g4M-e5-cVb" secondAttribute="trailing" constant="20" id="Yzk-ut-v2a"/>
-                            <constraint firstItem="0z4-Ko-hpg" firstAttribute="leading" secondItem="dyT-eD-1ZQ" secondAttribute="leading" id="dSx-nw-Z73"/>
-                            <constraint firstItem="g4M-e5-cVb" firstAttribute="leading" secondItem="dyT-eD-1ZQ" secondAttribute="leading" constant="20" id="dWn-Jn-Jbd"/>
-                            <constraint firstItem="0z4-Ko-hpg" firstAttribute="top" secondItem="dyT-eD-1ZQ" secondAttribute="top" id="w6h-nl-lhg"/>
-                            <constraint firstItem="g4M-e5-cVb" firstAttribute="top" secondItem="0z4-Ko-hpg" secondAttribute="bottom" constant="20" id="zbv-F2-2Cv"/>
+                            <constraint firstAttribute="bottom" secondItem="daw-5D-Edu" secondAttribute="bottom" constant="20" id="1B5-XL-q4n"/>
+                            <constraint firstItem="daw-5D-Edu" firstAttribute="trailing" secondItem="dyT-eD-1ZQ" secondAttribute="trailing" id="B2Q-1D-yet"/>
+                            <constraint firstItem="daw-5D-Edu" firstAttribute="leading" secondItem="dyT-eD-1ZQ" secondAttribute="leading" id="Fh0-2K-GLy"/>
+                            <constraint firstItem="daw-5D-Edu" firstAttribute="top" secondItem="dyT-eD-1ZQ" secondAttribute="top" id="Fl1-Wc-wk2"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="tcl-KQ-25K"/>
@@ -824,7 +826,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="KUp-bc-Gbu"/>
+        <segue reference="oQb-7z-Nph"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Logo" width="2236" height="1040"/>

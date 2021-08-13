@@ -26,7 +26,6 @@ class ViewController: UIViewController {
     }
     
     @IBAction func loginPressed(_ sender: Any) {
-        print("here")
         guard let email = emailTextField.text,
               let password = passwordTextField.text,
               email.count > 0,

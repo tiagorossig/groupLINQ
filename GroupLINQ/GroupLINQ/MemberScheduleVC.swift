@@ -23,6 +23,18 @@ class MemberScheduleVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setupBasic()
+        self.setupCalendarView()
+        self.setupNaviBar()
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        JZWeekViewHelper.viewTransitionHandler(to: size, weekView: calendarWeekView)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        // clear out the current events to avoid duplication on reload
+        self.viewModel.events = []
         
         memberName.text = "Member Name: \(mName ?? "")"
         self.db.collection("users").whereField("name", isEqualTo: mName)
@@ -44,13 +56,6 @@ class MemberScheduleVC: UIViewController {
                 }
             }
         }
-        self.setupBasic()
-        self.setupCalendarView()
-        self.setupNaviBar()
-    }
-    
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        JZWeekViewHelper.viewTransitionHandler(to: size, weekView: calendarWeekView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
