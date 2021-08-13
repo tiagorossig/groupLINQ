@@ -33,7 +33,13 @@ class YourTeamVC: UIViewController, UITableViewDelegate, UITableViewDataSource  
                 } else {
                     for document in querySnapshot!.documents {
                         let date = document.get("time") as! Timestamp
-                        self.suggestedTime.text = "\(date.dateValue())"
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "EEEE"
+                        let weekDay = dateFormatter.string(from: date.dateValue())
+                        let formatter = DateFormatter()
+                        formatter.timeStyle = .short
+                        let timeString = formatter.string(from: date.dateValue())
+                        self.suggestedTime.text = "\(weekDay) \(timeString)"
                         for member in document["members"] as? Array ?? [""] {
                             let docRef = self.db.collection("users").document(member)
                             docRef.getDocument {(document, error) in
