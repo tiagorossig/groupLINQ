@@ -273,7 +273,7 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
             }
             
             // We are authorized to use the camera
-            picker.allowsEditing = false
+            picker.allowsEditing = true
             picker.sourceType = .camera
             picker.cameraCaptureMode = .photo
             
