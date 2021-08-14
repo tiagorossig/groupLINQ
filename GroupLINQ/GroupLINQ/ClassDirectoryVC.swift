@@ -190,6 +190,14 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                             return
                         }
                         
+                        // check that the current user is not already in this class
+                        guard !(classData["students"] as! [String]).contains(Auth.auth().currentUser!.uid) else {
+                            let invalidAlert = UIAlertController(title: "Cannot join class.", message: "You are already a student in this class.", preferredStyle: .alert)
+                            invalidAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                            self.present(invalidAlert, animated: true, completion: nil)
+                            return
+                        }
+                        
                         let id = querySnapshot!.documents[0].documentID
                         self.db.collection("classes").document(id).updateData([
                             "students": FieldValue.arrayUnion([Auth.auth().currentUser?.uid])
