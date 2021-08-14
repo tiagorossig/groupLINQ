@@ -32,14 +32,6 @@ class YourTeamVC: UIViewController, UITableViewDelegate, UITableViewDataSource  
                     print("Error getting documents: \(err)")
                 } else {
                     for document in querySnapshot!.documents {
-                        let date = document.get("time") as! Timestamp
-                        let dateFormatter = DateFormatter()
-                        dateFormatter.dateFormat = "EEEE"
-                        let weekDay = dateFormatter.string(from: date.dateValue())
-                        let formatter = DateFormatter()
-                        formatter.timeStyle = .short
-                        let timeString = formatter.string(from: date.dateValue())
-                        self.suggestedTime.text = "\(weekDay) \(timeString)"
                         for member in document["members"] as? Array ?? [""] {
                             let docRef = self.db.collection("users").document(member)
                             docRef.getDocument {(document, error) in
@@ -53,6 +45,19 @@ class YourTeamVC: UIViewController, UITableViewDelegate, UITableViewDataSource  
                                 }
                             }
                         }
+                        
+                        // display suggested time
+                        guard let date = document.get("time") as? Timestamp else {
+                            self.suggestedTime.text = "No matching times found"
+                            return
+                        }
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "EEEE"
+                        let weekDay = dateFormatter.string(from: date.dateValue())
+                        let formatter = DateFormatter()
+                        formatter.timeStyle = .short
+                        let timeString = formatter.string(from: date.dateValue())
+                        self.suggestedTime.text = "\(weekDay) \(timeString)"
                     }
                 }
             }

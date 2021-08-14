@@ -50,6 +50,16 @@ class SurveyVC: UIViewController {
             timestamps.append(Timestamp(date: event.startDate))
         }
         Auth.auth().createUser(withEmail: self.email, password: self.password, completion: { user, error in
+            if let error = error {
+                let alert = UIAlertController(
+                  title: "Sign up failed",
+                  message: error.localizedDescription,
+                  preferredStyle: .alert)
+
+                alert.addAction(UIAlertAction(title:"OK",style:.default))
+                self.present(alert, animated: true, completion: nil)
+                return
+            }
             let currentUser = Auth.auth().currentUser
             if let currentUser = currentUser {
                 let uid = currentUser.uid
