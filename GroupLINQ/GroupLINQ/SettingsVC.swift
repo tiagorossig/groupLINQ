@@ -137,6 +137,14 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
 
                                 passwordChangedAlert.addAction(UIAlertAction(title:"OK",style:.default))
                                 self.present(passwordChangedAlert, animated: true, completion: nil)
+                            } else {
+                                let errorAlert = UIAlertController(
+                                  title: "Password change error.",
+                                    message: error?.localizedDescription,
+                                  preferredStyle: .alert)
+
+                                errorAlert.addAction(UIAlertAction(title:"OK",style:.default))
+                                self.present(errorAlert, animated: true, completion: nil)
                             }
                         }
                     }))
