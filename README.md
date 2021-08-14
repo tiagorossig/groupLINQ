@@ -17,10 +17,11 @@ Before running the app, run "pod install" inside the GroupLINQ folder where the 
 | Class Directory screen | --- | --- |
 | Create class | --- | --- |
 | Join class | --- | --- |
-| Class Overview screen | --- | --- |
+| Class Overview Screen | Class owner view of a specific group. Allows users to make groups. | Tiago (50%) <br /> Erika (50%)|
+| Make Groups | Algorithm that makes groups based on on users in the same class with matching availability. | Tiago (75%) <br /> Erika (25%) |
 | Team Results (waiting and team overview screens) | --- | --- |
 | View member schedule | --- | --- |
-| Profile picture | --- | --- |
+| Profile picture | Upload profile picture from gallery or camera. Photo saves in local storage and uploads file to Firebase storage. Displays profile picture in settings page. | Tiago (100%) |
 | Change password | --- | --- |
 
 
