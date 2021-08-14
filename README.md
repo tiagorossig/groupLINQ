@@ -4,7 +4,7 @@ Team members: Anisha Bagaria, Tiago Rossi, Erika Tan
 
 Name of project: GroupLINQ
 
-Dependencies: Xcode 12, Swift 5
+Dependencies: Xcode 12, Swift 5, Firebase
 
 Special Instructions: 
 
