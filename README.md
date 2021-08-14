@@ -1,11 +1,17 @@
 # groupLINQ
 
 Team members: Anisha Bagaria, Tiago Rossi, Erika Tan
+
 Name of project: GroupLINQ
+
 Dependencies: Xcode 12, Swift 5
+
 Special Instructions: 
+
 You have to open the file GroupLINQ.xcworkspace (as opposed to the file GroupLINQ.xcodeprog)
+
 Use an iPhone 12 Pro Simulator 
+
 Before running the app, run "pod install" inside the GroupLINQ folder where the podfile is located 
 
 | Feature | Description | Who/Percentage worked on|
