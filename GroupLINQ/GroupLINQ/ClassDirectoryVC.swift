@@ -139,6 +139,7 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                     } else {
                         self.db.collection("classes").document(self.className).setData([
                             "students": [],
+                            "open": true,
                             "code": self.generateClassCode(length: 6),
                             "owner": Auth.auth().currentUser?.uid
                         ]) { err in
@@ -179,6 +180,16 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                             self.present(invalidAlert, animated: true, completion: nil)
                             return
                         }
+                        
+                        // check that the current user does not own this class
+                        let classData = querySnapshot!.documents[0].data()
+                        guard classData["owner"] as? String != Auth.auth().currentUser?.uid else {
+                            let invalidAlert = UIAlertController(title: "Cannot join class.", message: "You are already the owner of this class.", preferredStyle: .alert)
+                            invalidAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                            self.present(invalidAlert, animated: true, completion: nil)
+                            return
+                        }
+                        
                         let id = querySnapshot!.documents[0].documentID
                         self.db.collection("classes").document(id).updateData([
                             "students": FieldValue.arrayUnion([Auth.auth().currentUser?.uid])
