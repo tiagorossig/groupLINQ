@@ -174,6 +174,7 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                     if let err = err {
                         print("Error getting documents: \(err)")
                     } else {
+                        // check class code is valid
                         guard querySnapshot?.count == 1 else {
                             let invalidAlert = UIAlertController(title: "Invalid class code.", message: "", preferredStyle: .alert)
                             invalidAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -185,6 +186,14 @@ class ClassDirectoryVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                         let classData = querySnapshot!.documents[0].data()
                         guard classData["owner"] as? String != Auth.auth().currentUser?.uid else {
                             let invalidAlert = UIAlertController(title: "Cannot join class.", message: "You are already the owner of this class.", preferredStyle: .alert)
+                            invalidAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                            self.present(invalidAlert, animated: true, completion: nil)
+                            return
+                        }
+                        
+                        // check class is open
+                        guard classData["open"] as! Bool == true else {
+                            let invalidAlert = UIAlertController(title: "Cannot join class.", message: "The groups for this class have already been made and it is closed.", preferredStyle: .alert)
                             invalidAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                             self.present(invalidAlert, animated: true, completion: nil)
                             return
