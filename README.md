@@ -27,7 +27,7 @@ Special Instructions:
 | Make Groups | Algorithm that makes groups based on on users in the same class with matching availability. | Tiago (75%) <br /> Erika (25%) |
 | Team Results (waiting and team overview screens) | Shows everyone that is apart of your group. Gives a suggested meeting time | Anisha (100%) |
 | View member schedule | Gives each member's contact information and available times | Anisha (60% - contact information) <br /> Erika (40% - available times) UI |
-| Profile picture | Upload profile picture from gallery or camera. Photo saves in local storage and uploads file to Firebase storage. Displays profile picture in settings page. | Tiago (100%) |
+| Profile picture | Upload profile picture from gallery or camera. Photo saves in local storage and uploads file to Firebase storage. Displays profile picture in settings page. | Tiago (90%) <br /> Erika (10% - default pic)|
 | Change password | Function in Settings that lets you change your account password | Erika (100%) |
 
 
